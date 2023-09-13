@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using TrabajoIntegradorSofttek.DataAccess;
 
 namespace TrabajoIntegradorSofttek
 {
@@ -45,8 +46,10 @@ namespace TrabajoIntegradorSofttek
             });
 
 
-
-
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>
+            {
+                options.UseSqlServer("name=defaultConnection");
+            });
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()
