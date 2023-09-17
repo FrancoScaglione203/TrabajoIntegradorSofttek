@@ -25,7 +25,7 @@ namespace TrabajoIntegradorSofttek.Entities
         public decimal ValorHora { get; set; }
         [Required]
         [Column("trabajo_costo")]
-        public decimal Costo { get; set; }
+        public decimal Costo { get; set; } //Modificar
         [Required]
         [Column("trabajo_activo")]
         public bool Activo { get; set; }

@@ -5,6 +5,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
 using TrabajoIntegradorSofttek.DataAccess;
+using System.Reflection;
+using TrabajoIntegradorSofttek.Services;
 
 namespace TrabajoIntegradorSofttek
 {
@@ -22,6 +24,8 @@ namespace TrabajoIntegradorSofttek
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(c =>
             {
+                
+
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     Description = "Autorizacion JWT",
@@ -50,6 +54,8 @@ namespace TrabajoIntegradorSofttek
             {
                 options.UseSqlServer("name=defaultConnection");
             });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()

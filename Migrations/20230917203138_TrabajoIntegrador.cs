@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrabajoIntegradorSofttek.Migrations
 {
-    public partial class TrabajoIntegradorSofttek : Migration
+    public partial class TrabajoIntegrador : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -100,7 +100,7 @@ namespace TrabajoIntegradorSofttek.Migrations
             migrationBuilder.InsertData(
                 table: "Trabajos",
                 columns: new[] { "trabajo_id", "trabajo_activo", "trabajo_cantHoras", "trabajo_costo", "trabajo_fecha", "trabajo_idProyecto", "trabajo_idServicio", "trabajo_valorHora" },
-                values: new object[] { 1, true, 1000, 150000m, new DateTime(2023, 9, 13, 0, 16, 4, 467, DateTimeKind.Local).AddTicks(5924), 1, 1, 150m });
+                values: new object[] { 1, true, 1000, 150000m, new DateTime(2023, 9, 17, 17, 31, 37, 998, DateTimeKind.Local).AddTicks(8500), 1, 1, 150m });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
