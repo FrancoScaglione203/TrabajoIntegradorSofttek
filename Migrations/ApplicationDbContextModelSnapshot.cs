@@ -185,7 +185,7 @@ namespace TrabajoIntegradorSofttek.Migrations
                             Activo = true,
                             CantHoras = 1000,
                             Costo = 150000m,
-                            Fecha = new DateTime(2023, 9, 13, 0, 16, 4, 467, DateTimeKind.Local).AddTicks(5924),
+                            Fecha = new DateTime(2023, 9, 17, 17, 31, 37, 998, DateTimeKind.Local).AddTicks(8500),
                             IdProyecto = 1,
                             IdServicio = 1,
                             ValorHora = 150m

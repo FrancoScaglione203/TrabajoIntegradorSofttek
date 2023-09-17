@@ -2,7 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
-
+using TrabajoIntegradorSofttek.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -10,11 +11,20 @@ namespace TrabajoIntegradorSofttek.Controllers
     [ApiController]
     public class UsuarioController : ControllerBase
     {
-        [HttpGet]
-        [Route("Usuarios")]
-        public IActionResult Usuarios()
+        private readonly IUnitOfWork _unitOfWork;
+        public UsuarioController(IUnitOfWork unitOfWork)
         {
-            return Ok("Todos los usuarios");
+            _unitOfWork = unitOfWork;
+        }
+
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
+        {
+            var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
+
+            return usuarios;
         }
 
 
