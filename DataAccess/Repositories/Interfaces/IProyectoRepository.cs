@@ -2,7 +2,7 @@
 
 namespace TrabajoIntegradorSofttek.DataAccess.Repositories.Interfaces
 {
-    public interface IUsuarioRepository : IRepository<Usuario>
+    public interface IProyectoRepository : IRepository<Proyecto>
     {
     }
 }

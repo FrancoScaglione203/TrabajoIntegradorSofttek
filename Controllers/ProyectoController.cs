@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
+using TrabajoIntegradorSofttek.Services;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -10,11 +11,21 @@ namespace TrabajoIntegradorSofttek.Controllers
     public class ProyectoController : ControllerBase
     {
 
+        private readonly IUnitOfWork _unitOfWork;
+        public ProyectoController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+
         [HttpGet]
         [Route("Proyectos")]
-        public IActionResult Proyectos()
+        //[Authorize]
+        public async Task<ActionResult<IEnumerable<Proyecto>>> GetAll()
         {
-            return Ok("Todos los proyectos");
+            var proyectos = await _unitOfWork.ProyectoRepository.GetAll();
+
+            return proyectos;
         }
 
 

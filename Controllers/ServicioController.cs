@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
+using TrabajoIntegradorSofttek.Services;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -9,11 +10,22 @@ namespace TrabajoIntegradorSofttek.Controllers
     [ApiController]
     public class ServicioController : ControllerBase
     {
+
+        private readonly IUnitOfWork _unitOfWork;
+        public ServicioController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+
         [HttpGet]
         [Route("Servicios")]
-        public IActionResult Servicios()
+        //[Authorize]
+        public async Task<ActionResult<IEnumerable<Servicio>>> GetAll()
         {
-            return Ok("Todos los servicios");
+            var servicios = await _unitOfWork.ServicioRepository.GetAll();
+
+            return servicios;
         }
 
 

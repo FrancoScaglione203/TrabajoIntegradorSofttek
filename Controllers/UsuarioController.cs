@@ -18,7 +18,8 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet] 
+        [Route("Usuarios")]
         [Authorize]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
