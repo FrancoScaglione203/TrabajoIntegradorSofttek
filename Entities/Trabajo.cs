@@ -18,6 +18,18 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
+        public Trabajo(AgregarTrabajoDto dto, int id)
+        {
+            Id = id;
+            Fecha = dto.Fecha;
+            IdProyecto = dto.IdProyecto;
+            IdServicio = dto.IdServicio;
+            CantHoras = dto.CantHoras;
+            ValorHora = dto.ValorHora;
+            Costo = dto.Costo;   //Despues modificar cuando arregle la propiedad
+            Activo = dto.Activo;
+        }
+
         public Trabajo()
         {
 

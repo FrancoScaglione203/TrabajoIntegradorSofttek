@@ -15,6 +15,15 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
+        public Servicio(AgregarServicioDto dto, int id)
+        {
+            Id = id;
+            Descripcion = dto.Descripcion;
+            Estado = dto.Estado;
+            ValorHora = dto.ValorHora;
+            Activo = dto.Activo;
+        }
+
         public Servicio()
         {
 

@@ -14,6 +14,15 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
+        public Proyecto(AgregarProyectoDto dto, int id)
+        {
+            Id = id;
+            Nombre = dto.Nombre;
+            Direccion = dto.Direccion;
+            Estado = dto.Estado;
+            Activo = dto.Activo;
+        }
+
         public Proyecto()
         {
 
