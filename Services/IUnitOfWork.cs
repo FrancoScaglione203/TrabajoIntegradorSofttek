@@ -8,5 +8,6 @@ namespace TrabajoIntegradorSofttek.Services
         public TrabajoRepository TrabajoRepository { get; }
         public ServicioRepository ServicioRepository { get; }
         public ProyectoRepository ProyectoRepository { get; }
+        Task<int> Complete();
     }
 }

@@ -1,10 +1,28 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Net;
+using TrabajoIntegradorSofttek.DTOs;
 
 namespace TrabajoIntegradorSofttek.Entities
 {
     public class Trabajo
     {
+        public Trabajo(AgregarTrabajoDto dto)
+        {
+            Fecha = dto.Fecha;
+            IdProyecto = dto.IdProyecto;
+            IdServicio = dto.IdServicio;
+            CantHoras = dto.CantHoras;
+            ValorHora = dto.ValorHora;
+            Costo = dto.Costo;
+            Activo = true;
+        }
+
+        public Trabajo()
+        {
+
+        }
+
         [Key]
         [Column("trabajo_id")]
         public int Id { get; set; }

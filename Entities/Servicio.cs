@@ -1,10 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.Extensions.Hosting;
+using TrabajoIntegradorSofttek.DTOs;
 
 namespace TrabajoIntegradorSofttek.Entities
 {
     public class Servicio
     {
+        public Servicio(AgregarServicioDto dto)
+        {
+            Descripcion = dto.Descripcion;
+            Estado = dto.Estado;
+            ValorHora = dto.ValorHora;
+            Activo = true;
+        }
+
+        public Servicio()
+        {
+
+        }
+
         [Key]
         [Column("servicio_id")]
         public int Id { get; set; }
