@@ -1,10 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using TrabajoIntegradorSofttek.DTOs;
 
 namespace TrabajoIntegradorSofttek.Entities
 {
     public class Usuario
     {
+        public Usuario(AgregarUsuarioDto dto)
+        {
+            Nombre = dto.Nombre;
+            Dni = dto.Dni;
+            Tipo = dto.Tipo;
+            Clave = dto.Clave;
+            Activo = true;
+        }
+
+        public Usuario()
+        {
+
+        }
+
         [Key]
         [Column("usuario_id")]
         public int Id { get; set; }

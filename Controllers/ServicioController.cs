@@ -31,9 +31,12 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         [HttpPost]
         [Route("Agregar")]
-        public IActionResult AgregarServicio(ServicioDto servicio)
+        public async Task<IActionResult> Agregar(AgregarServicioDto dto)
         {
-            return Unauthorized("No se pudo agregar servicio");
+            var servicio = new Servicio(dto);
+            await _unitOfWork.ServicioRepository.Insert(servicio);
+            await _unitOfWork.Complete();
+            return Ok(true);
         }
 
 

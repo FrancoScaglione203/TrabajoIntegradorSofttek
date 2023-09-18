@@ -21,5 +21,9 @@ namespace TrabajoIntegradorSofttek.Services
             ProyectoRepository = new ProyectoRepository(_context);
         }
 
+        public Task<int> Complete()
+        {
+            return _context.SaveChangesAsync();
+        }
     }
 }
