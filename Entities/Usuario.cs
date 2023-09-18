@@ -15,6 +15,16 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
+        public Usuario(AgregarUsuarioDto dto, int id)
+        {
+            Id = id;
+            Nombre = dto.Nombre;
+            Dni = dto.Dni;
+            Tipo = dto.Tipo;
+            Clave = dto.Clave;
+            Activo = true;
+        }
+
         public Usuario()
         {
 

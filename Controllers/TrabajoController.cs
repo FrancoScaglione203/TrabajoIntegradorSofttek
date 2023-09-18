@@ -40,11 +40,13 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-        [HttpPut]
-        [Route("Editar")]
-        public IActionResult EditarTrabajo(TrabajoDto trabajo)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update([FromRoute] int id, AgregarTrabajoDto dto)
         {
-            return Ok(trabajo);
+            var result = await _unitOfWork.TrabajoRepository.Update(new Trabajo(dto, id));
+            await _unitOfWork.Complete();
+            return Ok(true);
+
         }
 
 

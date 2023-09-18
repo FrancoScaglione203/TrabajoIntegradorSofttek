@@ -15,6 +15,21 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 
         }
 
+        public override async Task<bool> Update(Usuario updateUsuario)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == updateUsuario.Id);
+            if (usuario == null) { return false; }
+
+            usuario.Nombre = updateUsuario.Nombre;
+            usuario.Tipo = updateUsuario.Tipo;
+            usuario.Dni = updateUsuario.Dni;
+            usuario.Clave = updateUsuario.Clave;
+            usuario.Activo = updateUsuario.Activo;
+
+            _context.Usuarios.Update(usuario);
+            return true;
+        }
+
 
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {

@@ -24,5 +24,10 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             await _context.Set<T>().AddAsync(entity);
             return true;
         }
+
+        public virtual Task<bool> Update(T entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
