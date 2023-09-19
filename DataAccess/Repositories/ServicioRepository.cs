@@ -27,5 +27,16 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        public async Task<bool> Delete(int id)
+        {
+            var servicio = await _context.Servicios.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (servicio != null)
+            {
+                _context.Servicios.Remove(servicio);
+            }
+
+            return true;
+        }
+
     }
 }

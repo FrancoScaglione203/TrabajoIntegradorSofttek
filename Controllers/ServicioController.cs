@@ -50,11 +50,13 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-        [HttpDelete]
-        [Route("Eliminar")]
-        public IActionResult EliminarServicio(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return Ok($"Se elimino el elemento {id} correctamente");
+            var result = await _unitOfWork.ServicioRepository.Delete(id);
+
+            await _unitOfWork.Complete();
+            return Ok(true);
         }
     }
 }

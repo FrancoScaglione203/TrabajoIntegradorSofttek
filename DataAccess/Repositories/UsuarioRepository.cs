@@ -31,6 +31,30 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
         }
 
 
+        public async Task<bool> Delete(int id)
+        {
+            var user = await _context.Usuarios.Where(x => x.Id == id).FirstOrDefaultAsync();
+            if (user != null)
+            {
+                _context.Usuarios.Remove(user);
+            }
+
+            return true;
+        }
+
+        //CODIGO PARA BORRADO LOGICO
+        //public override async Task<bool> Delete(Usuario deleteUsuario)
+        //{
+        //    var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == deleteUsuario.Id);
+        //    if (usuario == null) { return false; }
+
+        //    usuario.Activo = false;
+
+        //    _context.Usuarios.Update(usuario);
+        //    return true;
+        //}
+
+
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
             return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == dto.Dni && x.Clave == dto.Clave);

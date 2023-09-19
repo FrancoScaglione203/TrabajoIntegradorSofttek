@@ -50,12 +50,14 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-        [HttpDelete]
-        [Route("Eliminar")]
-        public IActionResult EliminarProyecto(int id)
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return Ok($"Se elimino el elemento {id} correctamente");  //Para mandar un parametro tengo que poner el signo pesos al inicio y
-        }                                                             //el parametro entre corchetes
+            var result = await _unitOfWork.ProyectoRepository.Delete(id);
+
+            await _unitOfWork.Complete();
+            return Ok(true);
+        }
 
     }
 }

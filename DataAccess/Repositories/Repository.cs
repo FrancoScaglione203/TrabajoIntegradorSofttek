@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TrabajoIntegradorSofttek.DataAccess.Repositories.Interfaces;
 using TrabajoIntegradorSofttek.DataAccess;
+using TrabajoIntegradorSofttek.Entities;
 
 namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 {
@@ -24,10 +25,17 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             await _context.Set<T>().AddAsync(entity);
             return true;
         }
+        
 
         public virtual Task<bool> Update(T entity)
         {
             throw new NotImplementedException();
         }
+
+        public Task<bool> Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
