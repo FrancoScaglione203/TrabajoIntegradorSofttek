@@ -24,7 +24,9 @@ namespace TrabajoIntegradorSofttek.Controllers
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
+            //var usuariosActivos = usuarios.Where(x => x.Activo == true).ToList();
 
+            //return usuariosActivos;
             return usuarios;
         }
 
@@ -49,12 +51,25 @@ namespace TrabajoIntegradorSofttek.Controllers
             
         }
 
+        //CODIGO PARA BORRADO LOGICO
+        //[HttpPut("{idDelete}")]
+        //public async Task<IActionResult> Delete([FromRoute] int id, AgregarUsuarioDto dto)
+        //{
+        //    bool delete = true;
+        //    var result = await _unitOfWork.UsuarioRepository.Delete(new Usuario(dto, id, delete));
+        //    await _unitOfWork.Complete();
+        //    return Ok(true);
 
-        [HttpDelete]
-        [Route("Eliminar")]
-        public IActionResult EliminarUsuario(int id)
+        //}
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            return Ok($"Se elimino el elemento {id} correctamente");
+            var result = await _unitOfWork.UsuarioRepository.Delete(id);
+
+            await _unitOfWork.Complete();
+            return Ok(true);
         }
 
     }
