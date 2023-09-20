@@ -9,54 +9,56 @@ namespace TrabajoIntegradorSofttek.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicioController : ControllerBase
+    public class RoleController : ControllerBase
     {
-
         private readonly IUnitOfWork _unitOfWork;
-        public ServicioController(IUnitOfWork unitOfWork)
+        public RoleController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
 
-        [Authorize(Policy = "Admin")]
-        [HttpGet]
-        [Route("Servicios")]
-        public async Task<ActionResult<IEnumerable<Servicio>>> GetAll()
-        {
-            var servicios = await _unitOfWork.ServicioRepository.GetAll();
 
-            return servicios;
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Role>>> GetAll()
+        {
+            var Roles = await _unitOfWork.RoleRepository.GetAll();
+
+            return Roles;
         }
+
 
 
         [HttpPost]
-        [Route("Agregar")]
-        public async Task<IActionResult> Agregar(AgregarServicioDto dto)
+        [Route("Role")]
+        public async Task<IActionResult> Insert(RoleDto dto)
         {
-            var servicio = new Servicio(dto);
-            await _unitOfWork.ServicioRepository.Insert(servicio);
+
+            var Role = new Role(dto);
+            await _unitOfWork.RoleRepository.Insert(Role);
             await _unitOfWork.Complete();
             return Ok(true);
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, AgregarServicioDto dto)
+
+        public async Task<IActionResult> Update([FromRoute] int id, Role role)
         {
-            var result = await _unitOfWork.ServicioRepository.Update(new Servicio(dto, id));
+            var result = await _unitOfWork.RoleRepository.Update(role);
+
             await _unitOfWork.Complete();
             return Ok(true);
-
         }
-
 
         [HttpDelete("{id}")]
+
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
-            var result = await _unitOfWork.ServicioRepository.Delete(id);
+            var result = await _unitOfWork.RoleRepository.Delete(id);
 
             await _unitOfWork.Complete();
             return Ok(true);
         }
+
     }
 }

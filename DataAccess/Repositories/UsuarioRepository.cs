@@ -4,6 +4,7 @@ using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DataAccess.Repositories.Interfaces;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.DataAccess.Repositories;
+using TrabajoIntegradorSofttek.Helpers;
 
 namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 {
@@ -21,7 +22,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             if (usuario == null) { return false; }
 
             usuario.Nombre = updateUsuario.Nombre;
-            usuario.Tipo = updateUsuario.Tipo;
+            usuario.RoleId = updateUsuario.RoleId;
             usuario.Dni = updateUsuario.Dni;
             usuario.Clave = updateUsuario.Clave;
             usuario.Activo = updateUsuario.Activo;
@@ -57,7 +58,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == dto.Dni && x.Clave == dto.Clave);
+            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == dto.Dni && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave));
         }
     }
 }

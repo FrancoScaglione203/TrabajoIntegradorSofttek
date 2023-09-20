@@ -22,8 +22,8 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             
             trabajo.Activo = updateTrabajo.Activo;
             trabajo.Fecha = updateTrabajo.Fecha;
-            trabajo.IdProyecto = updateTrabajo.IdProyecto;
-            trabajo.IdServicio = updateTrabajo.IdServicio;
+            trabajo.ProyectoId = updateTrabajo.ProyectoId;
+            trabajo.ServicioId = updateTrabajo.ServicioId;
             trabajo.CantHoras = updateTrabajo.CantHoras;
             trabajo.ValorHora = updateTrabajo.ValorHora;
             trabajo.Costo = updateTrabajo.Costo;   //Despues modificar cuando arregle la propiedad

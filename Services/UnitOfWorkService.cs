@@ -10,6 +10,7 @@ namespace TrabajoIntegradorSofttek.Services
         public TrabajoRepository TrabajoRepository { get; private set; }
         public ServicioRepository ServicioRepository { get; private set; }
         public ProyectoRepository ProyectoRepository { get; private set; }
+        public RoleRepository RoleRepository { get; private set; }
 
 
         public UnitOfWorkService(ApplicationDbContext context)
@@ -19,6 +20,7 @@ namespace TrabajoIntegradorSofttek.Services
             TrabajoRepository = new TrabajoRepository(_context);
             ServicioRepository = new ServicioRepository(_context);
             ProyectoRepository = new ProyectoRepository(_context);
+            RoleRepository = new RoleRepository(_context);
         }
 
         public Task<int> Complete()

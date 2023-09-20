@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TrabajoIntegradorSofttek.Entities;
-
+using TrabajoIntegradorSofttek.Helpers;
 
 namespace TrabajoIntegradorSofttek.DataAccess.DataBaseSeeding
 {
@@ -14,8 +14,8 @@ namespace TrabajoIntegradorSofttek.DataAccess.DataBaseSeeding
                     Id = 1,
                     Nombre = "Franco",
                     Dni = 41826520,
-                    Tipo = 1,
-                    Clave = "1234",
+                    RoleId = 1,
+                    Clave = PasswordEncryptHelper.EncryptPassword("1234"),
                     Activo = true
                 },
                 new Usuario
@@ -23,8 +23,8 @@ namespace TrabajoIntegradorSofttek.DataAccess.DataBaseSeeding
                     Id = 2,
                     Nombre = "Eliana",
                     Dni = 11824320,
-                    Tipo = 2,
-                    Clave = "1234",
+                    RoleId = 2,
+                    Clave = PasswordEncryptHelper.EncryptPassword("1234"),
                     Activo = true
                 },
                 new Usuario
@@ -32,8 +32,8 @@ namespace TrabajoIntegradorSofttek.DataAccess.DataBaseSeeding
                     Id = 3,
                     Nombre = "Juan",
                     Dni = 42446530,
-                    Tipo = 2,
-                    Clave = "1234",
+                    RoleId = 2,
+                    Clave = PasswordEncryptHelper.EncryptPassword("1234"),
                     Activo = true
                 });
         }

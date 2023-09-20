@@ -7,6 +7,7 @@ using Microsoft.OpenApi.Models;
 using TrabajoIntegradorSofttek.DataAccess;
 using System.Reflection;
 using TrabajoIntegradorSofttek.Services;
+using System.Security.Claims;
 
 namespace TrabajoIntegradorSofttek
 {
@@ -56,6 +57,25 @@ namespace TrabajoIntegradorSofttek
             });
 
             builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
+
+
+            builder.Services.AddAuthorization(option =>
+            {
+                option.AddPolicy("Admin", policy =>
+
+                {
+                    policy.RequireClaim(ClaimTypes.Role, "1");
+                });
+
+
+                option.AddPolicy("AdminConsultor", policy =>
+
+                {
+                    policy.RequireClaim(ClaimTypes.Role, "1");
+                    policy.RequireClaim(ClaimTypes.Role, "2");
+
+                });
+            });
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()
