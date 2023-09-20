@@ -24,6 +24,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             usuario.Nombre = updateUsuario.Nombre;
             usuario.RoleId = updateUsuario.RoleId;
             usuario.Dni = updateUsuario.Dni;
+            usuario.Cuil = updateUsuario.Cuil;
             usuario.Clave = updateUsuario.Clave;
             usuario.Activo = updateUsuario.Activo;
 
@@ -43,22 +44,9 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
-        //CODIGO PARA BORRADO LOGICO
-        //public override async Task<bool> Delete(Usuario deleteUsuario)
-        //{
-        //    var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == deleteUsuario.Id);
-        //    if (usuario == null) { return false; }
-
-        //    usuario.Activo = false;
-
-        //    _context.Usuarios.Update(usuario);
-        //    return true;
-        //}
-
-
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
-            return await _context.Usuarios.SingleOrDefaultAsync(x => x.Dni == dto.Dni && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave));
+            return await _context.Usuarios.Include(x=> x.Role).SingleOrDefaultAsync(x => x.Cuil == dto.Cuil && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil));
         }
     }
 }

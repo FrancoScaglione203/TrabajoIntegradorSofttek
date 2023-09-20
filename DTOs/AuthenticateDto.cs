@@ -2,7 +2,7 @@
 {
     public class AuthenticateDto
     {
-        public int Dni { get; set; }
+        public long Cuil { get; set; }
 
         public string Clave { get; set; }
     }

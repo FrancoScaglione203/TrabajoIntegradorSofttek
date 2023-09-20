@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TrabajoIntegradorSofttek.Migrations
 {
-    public partial class TrabajoSofttek : Migration
+    public partial class TPSofttek : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -64,6 +64,7 @@ namespace TrabajoIntegradorSofttek.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     usuario_nombre = table.Column<string>(type: "VARCHAR(50)", nullable: false),
                     usuario_dni = table.Column<int>(type: "int", nullable: false),
+                    usuario_cuil = table.Column<long>(type: "bigint", nullable: false),
                     role_id = table.Column<int>(type: "int", nullable: false),
                     usuario_clave = table.Column<string>(type: "VARCHAR(250)", nullable: false),
                     usuario_activo = table.Column<bool>(type: "bit", nullable: false)
@@ -142,16 +143,16 @@ namespace TrabajoIntegradorSofttek.Migrations
             migrationBuilder.InsertData(
                 table: "Trabajos",
                 columns: new[] { "trabajo_id", "trabajo_activo", "trabajo_cantHoras", "trabajo_costo", "trabajo_fecha", "proyecto_id", "servicio_id", "trabajo_valorHora" },
-                values: new object[] { 1, true, 1000, 150000m, new DateTime(2023, 9, 19, 21, 42, 43, 608, DateTimeKind.Local).AddTicks(6940), 1, 1, 150m });
+                values: new object[] { 1, true, 1000, 150000m, new DateTime(2023, 9, 19, 23, 37, 34, 158, DateTimeKind.Local).AddTicks(7746), 1, 1, 150m });
 
             migrationBuilder.InsertData(
                 table: "Usuarios",
-                columns: new[] { "usuario_id", "usuario_activo", "usuario_clave", "usuario_dni", "usuario_nombre", "role_id" },
+                columns: new[] { "usuario_id", "usuario_activo", "usuario_clave", "usuario_cuil", "usuario_dni", "usuario_nombre", "role_id" },
                 values: new object[,]
                 {
-                    { 1, true, "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", 41826520, "Franco", 1 },
-                    { 2, true, "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", 11824320, "Eliana", 2 },
-                    { 3, true, "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", 42446530, "Juan", 2 }
+                    { 1, true, "241b56ebb2e452dfa1d6c172fb66e95722442d6097e1d62e6705e3dc1f3bff53", 20418265206L, 41826520, "Franco", 1 },
+                    { 2, true, "2aa98a180fa531837a47595f8128731e0364baab83703c0c19548afb7fce58ff", 27118243201L, 11824320, "Eliana", 2 },
+                    { 3, true, "08f475f7eda6dfc3934f3e34873ec2f08f532ff526eec24c84a2cbe2355d78b4", 20424465306L, 42446530, "Juan", 2 }
                 });
 
             migrationBuilder.CreateIndex(
