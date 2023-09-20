@@ -12,8 +12,8 @@ using TrabajoIntegradorSofttek.DataAccess;
 namespace TrabajoIntegradorSofttek.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230920004243_TrabajoSofttek")]
-    partial class TrabajoSofttek
+    [Migration("20230920023734_TPSofttek")]
+    partial class TPSofttek
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -235,7 +235,7 @@ namespace TrabajoIntegradorSofttek.Migrations
                             Activo = true,
                             CantHoras = 1000,
                             Costo = 150000m,
-                            Fecha = new DateTime(2023, 9, 19, 21, 42, 43, 608, DateTimeKind.Local).AddTicks(6940),
+                            Fecha = new DateTime(2023, 9, 19, 23, 37, 34, 158, DateTimeKind.Local).AddTicks(7746),
                             ProyectoId = 1,
                             ServicioId = 1,
                             ValorHora = 150m
@@ -259,6 +259,10 @@ namespace TrabajoIntegradorSofttek.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(250)")
                         .HasColumnName("usuario_clave");
+
+                    b.Property<long>("Cuil")
+                        .HasColumnType("bigint")
+                        .HasColumnName("usuario_cuil");
 
                     b.Property<int>("Dni")
                         .HasColumnType("int")
@@ -284,7 +288,8 @@ namespace TrabajoIntegradorSofttek.Migrations
                         {
                             Id = 1,
                             Activo = true,
-                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            Clave = "241b56ebb2e452dfa1d6c172fb66e95722442d6097e1d62e6705e3dc1f3bff53",
+                            Cuil = 20418265206L,
                             Dni = 41826520,
                             Nombre = "Franco",
                             RoleId = 1
@@ -293,7 +298,8 @@ namespace TrabajoIntegradorSofttek.Migrations
                         {
                             Id = 2,
                             Activo = true,
-                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            Clave = "2aa98a180fa531837a47595f8128731e0364baab83703c0c19548afb7fce58ff",
+                            Cuil = 27118243201L,
                             Dni = 11824320,
                             Nombre = "Eliana",
                             RoleId = 2
@@ -302,7 +308,8 @@ namespace TrabajoIntegradorSofttek.Migrations
                         {
                             Id = 3,
                             Activo = true,
-                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+                            Clave = "08f475f7eda6dfc3934f3e34873ec2f08f532ff526eec24c84a2cbe2355d78b4",
+                            Cuil = 20424465306L,
                             Dni = 42446530,
                             Nombre = "Juan",
                             RoleId = 2

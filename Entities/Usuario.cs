@@ -11,8 +11,9 @@ namespace TrabajoIntegradorSofttek.Entities
         {
             Nombre = dto.Nombre;
             Dni = dto.Dni;
+            Cuil = dto.Cuil;
             RoleId = 2;
-            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave); //Despues agregar propiedad cuil
+            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil); //Despues agregar propiedad cuil
             Activo = true;
         }
 
@@ -21,8 +22,9 @@ namespace TrabajoIntegradorSofttek.Entities
             Id = id;
             Nombre = dto.Nombre;
             Dni = dto.Dni;
+            Cuil = dto.Cuil;
             RoleId = dto.IdRole;
-            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave); //Despues agregar propiedad cuil
+            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil); //Despues agregar propiedad cuil
             Activo = true;
         }
 
@@ -40,9 +42,9 @@ namespace TrabajoIntegradorSofttek.Entities
         [Required]
         [Column("usuario_dni")]
         public int Dni { get; set; }
-        //[Required]
-        //[Column("usuario_cuil")]
-        //public int Cuil { get; set; }
+        [Required]
+        [Column("usuario_cuil")]
+        public long Cuil { get; set; }
         [Required]
         [Column("role_id")]
         public int RoleId { get; set; }

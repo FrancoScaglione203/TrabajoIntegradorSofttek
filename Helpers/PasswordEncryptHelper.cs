@@ -5,9 +5,9 @@ namespace TrabajoIntegradorSofttek.Helpers
 {
     public class PasswordEncryptHelper
     {
-            public static string EncryptPassword(string password)
+            public static string EncryptPassword(string password, long cuil)
             {
-                var salt = CreateSalt("a");  
+                var salt = CreateSalt(cuil.ToString());  
                 string saltAndPwd = String.Concat(password, salt);
                 var sha256 = SHA256.Create();
                 var encoding = new ASCIIEncoding();

@@ -34,6 +34,7 @@ namespace TrabajoIntegradorSofttek.Controllers
                 Nombre = usuarioCredentials.Nombre,
                 RoleId = usuarioCredentials.RoleId,
                 Dni = usuarioCredentials.Dni,
+                Cuil = usuarioCredentials.Cuil,
                 Token = token
             };
 

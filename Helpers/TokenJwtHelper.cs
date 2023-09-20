@@ -20,7 +20,7 @@ namespace TrabajoIntegradorSofttek.Helpers
             var claims = new[]   //La claim manda todo lo que necesita el token que esta en el .jason
             {
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
-                new Claim("Dni",usuario.Dni.ToString()),
+                new Claim("Cuil",usuario.Cuil.ToString()),
                 new Claim(ClaimTypes.NameIdentifier, usuario.Id.ToString()),
                 new Claim(ClaimTypes.Role, usuario.RoleId.ToString()),
             };
