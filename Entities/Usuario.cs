@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using TrabajoIntegradorSofttek.DTOs;
+using TrabajoIntegradorSofttek.Helpers;
 
 namespace TrabajoIntegradorSofttek.Entities
 {
@@ -10,8 +11,8 @@ namespace TrabajoIntegradorSofttek.Entities
         {
             Nombre = dto.Nombre;
             Dni = dto.Dni;
-            Tipo = dto.Tipo;
-            Clave = dto.Clave;
+            RoleId = 2;
+            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave); //Despues agregar propiedad cuil
             Activo = true;
         }
 
@@ -20,8 +21,8 @@ namespace TrabajoIntegradorSofttek.Entities
             Id = id;
             Nombre = dto.Nombre;
             Dni = dto.Dni;
-            Tipo = dto.Tipo;
-            Clave = dto.Clave;
+            RoleId = dto.IdRole;
+            Clave = PasswordEncryptHelper.EncryptPassword(dto.Clave); //Despues agregar propiedad cuil
             Activo = true;
         }
 
@@ -39,14 +40,19 @@ namespace TrabajoIntegradorSofttek.Entities
         [Required]
         [Column("usuario_dni")]
         public int Dni { get; set; }
+        //[Required]
+        //[Column("usuario_cuil")]
+        //public int Cuil { get; set; }
         [Required]
-        [Column("usuario_tipo")]
-        public int Tipo { get; set; }
+        [Column("role_id")]
+        public int RoleId { get; set; }
+        public Role? Role { get; set; }
         [Required]
-        [Column("usuario_clave", TypeName = "VARCHAR(50)")]
+        [Column("usuario_clave", TypeName = "VARCHAR(250)")]
         public string Clave { get; set; }
         [Required]
         [Column("usuario_activo")]
         public bool Activo { get; set; }
+
     }
 }

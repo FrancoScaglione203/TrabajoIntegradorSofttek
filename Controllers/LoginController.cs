@@ -32,7 +32,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             var usuario = new UsuarioLoginDto()
             {
                 Nombre = usuarioCredentials.Nombre,
-                Tipo = usuarioCredentials.Tipo,
+                RoleId = usuarioCredentials.RoleId,
                 Dni = usuarioCredentials.Dni,
                 Token = token
             };

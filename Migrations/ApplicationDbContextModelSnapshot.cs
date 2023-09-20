@@ -80,6 +80,50 @@ namespace TrabajoIntegradorSofttek.Migrations
                         });
                 });
 
+            modelBuilder.Entity("TrabajoIntegradorSofttek.Entities.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("role_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<bool>("Activo")
+                        .HasColumnType("bit")
+                        .HasColumnName("role_activo");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("role_description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("role_name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Activo = true,
+                            Description = "Admin",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Activo = true,
+                            Description = "Consulta",
+                            Name = "Consulta"
+                        });
+                });
+
             modelBuilder.Entity("TrabajoIntegradorSofttek.Entities.Servicio", b =>
                 {
                     b.Property<int>("Id")
@@ -162,19 +206,23 @@ namespace TrabajoIntegradorSofttek.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("trabajo_fecha");
 
-                    b.Property<int>("IdProyecto")
+                    b.Property<int>("ProyectoId")
                         .HasColumnType("int")
-                        .HasColumnName("trabajo_idProyecto");
+                        .HasColumnName("proyecto_id");
 
-                    b.Property<int>("IdServicio")
+                    b.Property<int>("ServicioId")
                         .HasColumnType("int")
-                        .HasColumnName("trabajo_idServicio");
+                        .HasColumnName("servicio_id");
 
                     b.Property<decimal>("ValorHora")
                         .HasColumnType("decimal(18,2)")
                         .HasColumnName("trabajo_valorHora");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProyectoId");
+
+                    b.HasIndex("ServicioId");
 
                     b.ToTable("Trabajos");
 
@@ -185,9 +233,9 @@ namespace TrabajoIntegradorSofttek.Migrations
                             Activo = true,
                             CantHoras = 1000,
                             Costo = 150000m,
-                            Fecha = new DateTime(2023, 9, 17, 17, 31, 37, 998, DateTimeKind.Local).AddTicks(8500),
-                            IdProyecto = 1,
-                            IdServicio = 1,
+                            Fecha = new DateTime(2023, 9, 19, 21, 42, 43, 608, DateTimeKind.Local).AddTicks(6940),
+                            ProyectoId = 1,
+                            ServicioId = 1,
                             ValorHora = 150m
                         });
                 });
@@ -207,7 +255,7 @@ namespace TrabajoIntegradorSofttek.Migrations
 
                     b.Property<string>("Clave")
                         .IsRequired()
-                        .HasColumnType("VARCHAR(50)")
+                        .HasColumnType("VARCHAR(250)")
                         .HasColumnName("usuario_clave");
 
                     b.Property<int>("Dni")
@@ -219,11 +267,13 @@ namespace TrabajoIntegradorSofttek.Migrations
                         .HasColumnType("VARCHAR(50)")
                         .HasColumnName("usuario_nombre");
 
-                    b.Property<int>("Tipo")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int")
-                        .HasColumnName("usuario_tipo");
+                        .HasColumnName("role_id");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
 
                     b.ToTable("Usuarios");
 
@@ -232,29 +282,59 @@ namespace TrabajoIntegradorSofttek.Migrations
                         {
                             Id = 1,
                             Activo = true,
-                            Clave = "1234",
+                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
                             Dni = 41826520,
                             Nombre = "Franco",
-                            Tipo = 1
+                            RoleId = 1
                         },
                         new
                         {
                             Id = 2,
                             Activo = true,
-                            Clave = "1234",
+                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
                             Dni = 11824320,
                             Nombre = "Eliana",
-                            Tipo = 2
+                            RoleId = 2
                         },
                         new
                         {
                             Id = 3,
                             Activo = true,
-                            Clave = "1234",
+                            Clave = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
                             Dni = 42446530,
                             Nombre = "Juan",
-                            Tipo = 2
+                            RoleId = 2
                         });
+                });
+
+            modelBuilder.Entity("TrabajoIntegradorSofttek.Entities.Trabajo", b =>
+                {
+                    b.HasOne("TrabajoIntegradorSofttek.Entities.Proyecto", "Proyecto")
+                        .WithMany()
+                        .HasForeignKey("ProyectoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TrabajoIntegradorSofttek.Entities.Servicio", "Servicio")
+                        .WithMany()
+                        .HasForeignKey("ServicioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Proyecto");
+
+                    b.Navigation("Servicio");
+                });
+
+            modelBuilder.Entity("TrabajoIntegradorSofttek.Entities.Usuario", b =>
+                {
+                    b.HasOne("TrabajoIntegradorSofttek.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Role");
                 });
 #pragma warning restore 612, 618
         }

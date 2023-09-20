@@ -17,10 +17,9 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpGet] 
         [Route("Usuarios")]
-        [Authorize]
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();

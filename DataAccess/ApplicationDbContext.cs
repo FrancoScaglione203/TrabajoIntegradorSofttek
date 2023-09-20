@@ -12,6 +12,7 @@ namespace TrabajoIntegradorSofttek.DataAccess
         public DbSet<Servicio> Servicios { get; set; }
         public DbSet<Proyecto> Proyectos { get; set; }
         public DbSet<Trabajo> Trabajos { get; set; }
+        public DbSet<Role> Roles { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -20,7 +21,8 @@ namespace TrabajoIntegradorSofttek.DataAccess
                 new UsuarioSeeder(),
                 new ServicioSeeder(),
                 new ProyectoSeeder(),
-                new TrabajoSeeder()
+                new TrabajoSeeder(),
+                new RoleSeeder(),
             };
 
             foreach (var seeder in seeders)

@@ -7,18 +7,18 @@ namespace TrabajoIntegradorSofttek.DataAccess.DataBaseSeeding
     {
         public void SeedDataBase(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Trabajo>().HasData(
-                new Trabajo
-                {
-                    Id = 1,
-                    Fecha = DateTime.Now,
-                    IdProyecto = 1,
-                    IdServicio = 1,
-                    CantHoras = 1000,
-                    ValorHora = 150,
-                    Costo = 150000,
-                    Activo = true
-                });
+            var trabajo = new Trabajo
+            {
+                Id = 1,
+                Fecha = DateTime.Now,
+                ProyectoId = 1,
+                ServicioId = 1,
+                CantHoras = 1000,
+                ValorHora = 150,
+                Activo = true
+            };
+            trabajo.Costo = trabajo.CantHoras * trabajo.ValorHora;
+            modelBuilder.Entity<Trabajo>().HasData(trabajo);
         }
     }
 }
