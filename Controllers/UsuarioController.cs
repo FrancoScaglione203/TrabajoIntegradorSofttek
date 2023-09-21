@@ -5,6 +5,7 @@ using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.Services;
 using Microsoft.AspNetCore.Authorization;
 using TrabajoIntegradorSofttek.Infraestructure;
+using TrabajoIntegradorSofttek.Helpers;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -18,13 +19,21 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Authorize(Policy = "Admin")]
+        //[Authorize(Policy = "Admin")]
         [HttpGet] 
         [Route("Usuarios")]
         public async Task<IActionResult> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
-            return ResponseFactory.CreateSuccessResponse(200, usuarios);
+            int pageToShow = 1;
+
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+
+            var paginateUsuarios = PaginateHelper.Paginate(usuarios, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginateUsuarios); ;
         }
 
         [HttpGet("UsuarioById/{id}")]
