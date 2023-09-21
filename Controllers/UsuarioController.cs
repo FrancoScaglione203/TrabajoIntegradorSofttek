@@ -4,6 +4,7 @@ using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.Services;
 using Microsoft.AspNetCore.Authorization;
+using TrabajoIntegradorSofttek.Infraestructure;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -20,10 +21,10 @@ namespace TrabajoIntegradorSofttek.Controllers
         [Authorize(Policy = "Admin")]
         [HttpGet] 
         [Route("Usuarios")]
-        public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
-            return usuarios;
+            return ResponseFactory.CreateSuccessResponse(200, usuarios);
         }
 
         [HttpGet("UsuarioById/{id}")]
@@ -42,10 +43,11 @@ namespace TrabajoIntegradorSofttek.Controllers
         [Route("Agregar")]
         public async Task<IActionResult> Agregar(AgregarUsuarioDto dto)
         {
+            if (await _unitOfWork.UsuarioRepository.UsuarioEx(dto.Cuil)) return ResponseFactory.CreateErrorResponse(409, $"Ya existe un usuario registrado con el cuil:{dto.Cuil}");
             var usuario = new Usuario(dto);
             await _unitOfWork.UsuarioRepository.Insert(usuario);
             await _unitOfWork.Complete();
-            return Ok(true);
+            return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
         }
 
 
@@ -53,9 +55,16 @@ namespace TrabajoIntegradorSofttek.Controllers
         public async Task<IActionResult> Update([FromRoute] int id, AgregarUsuarioDto dto)
         {
             var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto, id));
-            await _unitOfWork.Complete();
-            return Ok(true);
-            
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el usuario");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
+
         }
 
 
@@ -74,8 +83,15 @@ namespace TrabajoIntegradorSofttek.Controllers
         {
             var result = await _unitOfWork.UsuarioRepository.Delete(id);
 
-            await _unitOfWork.Complete();
-            return Ok(true);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el usuario");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
         }
 
     }

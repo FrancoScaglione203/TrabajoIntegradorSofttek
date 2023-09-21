@@ -59,5 +59,10 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
         {
             return await _context.Usuarios.Include(x=> x.Role).SingleOrDefaultAsync(x => x.Cuil == dto.Cuil && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil));
         }
+
+        public async Task<bool> UsuarioEx(long cuil)
+        {
+            return await _context.Usuarios.AnyAsync(x => x.Cuil == cuil);
+        }
     }
 }
