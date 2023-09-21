@@ -23,12 +23,20 @@ namespace TrabajoIntegradorSofttek.Controllers
         public async Task<ActionResult<IEnumerable<Usuario>>> GetAll()
         {
             var usuarios = await _unitOfWork.UsuarioRepository.GetAll();
-            //var usuariosActivos = usuarios.Where(x => x.Activo == true).ToList();
-
-            //return usuariosActivos;
             return usuarios;
         }
 
+        [HttpGet("UsuarioById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var usuario = await _unitOfWork.UsuarioRepository.GetById(id);
+            if (usuario == null)
+            {
+                return NotFound();
+            }
+            await _unitOfWork.Complete();
+            return Ok(usuario);
+        }
 
         [HttpPost]
         [Route("Agregar")]
@@ -50,19 +58,18 @@ namespace TrabajoIntegradorSofttek.Controllers
             
         }
 
-        //CODIGO PARA BORRADO LOGICO
-        //[HttpPut("{idDelete}")]
-        //public async Task<IActionResult> Delete([FromRoute] int id, AgregarUsuarioDto dto)
-        //{
-        //    bool delete = true;
-        //    var result = await _unitOfWork.UsuarioRepository.Delete(new Usuario(dto, id, delete));
-        //    await _unitOfWork.Complete();
-        //    return Ok(true);
 
-        //}
+        [HttpPut("DeleteLogico/{id}")]
+        public async Task<IActionResult> DeleteLogico([FromRoute] int id)
+        {
+            var result = await _unitOfWork.UsuarioRepository.DeleteLogico(id);
+            await _unitOfWork.Complete();
+            return Ok(true);
+
+        }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.UsuarioRepository.Delete(id);

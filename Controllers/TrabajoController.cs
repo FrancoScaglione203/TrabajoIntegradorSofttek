@@ -28,6 +28,18 @@ namespace TrabajoIntegradorSofttek.Controllers
             return trabajos;
         }
 
+        [HttpGet("TrabajoById/{id}")]
+        public async Task<IActionResult> GetById([FromRoute] int id)
+        {
+            var trabajo = await _unitOfWork.TrabajoRepository.GetById(id);
+            if (trabajo == null)
+            {
+                return NotFound();
+            }
+            await _unitOfWork.Complete();
+            return Ok(trabajo);
+        }
+
 
         [HttpPost]
         [Route("Agregar")]
@@ -49,6 +61,14 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
+        [HttpPut("DeleteLogico/{id}")]
+        public async Task<IActionResult> DeleteLogico([FromRoute] int id)
+        {
+            var result = await _unitOfWork.TrabajoRepository.DeleteLogico(id);
+            await _unitOfWork.Complete();
+            return Ok(true);
+
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)

@@ -2,15 +2,21 @@
 using TrabajoIntegradorSofttek.DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
+using TrabajoIntegradorSofttek.Services;
 
 namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 {
     public class ServicioRepository : Repository<Servicio>, IServicioRepository
     {
-
+        private readonly IUnitOfWork _unitOfWorkService;
         public ServicioRepository(ApplicationDbContext context) : base(context)
         {
 
+        }
+        public async Task<List<Servicio>> GetActivos()
+        {
+            var activeServices = await _context.Servicios.Where(x => x.Activo == true).ToListAsync();
+            return activeServices;
         }
 
         public override async Task<bool> Update(Servicio updateServicio)
@@ -22,6 +28,17 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             servicio.Estado = updateServicio.Estado;
             servicio.ValorHora = updateServicio.ValorHora;
             servicio.Activo = updateServicio.Activo;
+
+            _context.Servicios.Update(servicio);
+            return true;
+        }
+
+        public async Task<bool> DeleteLogico(int id)
+        {
+            var servicio = await _context.Servicios.FirstOrDefaultAsync(x => x.Id == id);
+            if (servicio == null) { return false; }
+
+            servicio.Activo = false;
 
             _context.Servicios.Update(servicio);
             return true;

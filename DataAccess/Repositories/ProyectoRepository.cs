@@ -26,6 +26,17 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        public async Task<bool> DeleteLogico(int id)
+        {
+            var proyecto = await _context.Proyectos.FirstOrDefaultAsync(x => x.Id == id);
+            if (proyecto == null) { return false; }
+
+            proyecto.Activo = false;
+
+            _context.Proyectos.Update(proyecto);
+            return true;
+        }
+
         public async Task<bool> Delete(int id)
         {
             var proyecto = await _context.Proyectos.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -35,6 +46,12 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             }
 
             return true;
+        }
+
+        public async Task<List<Proyecto>> GetEstado(int estado)
+        {
+            var estadoProyectos = await _context.Proyectos.Where(x => x.Estado == estado).ToListAsync();
+            return estadoProyectos;
         }
 
     }

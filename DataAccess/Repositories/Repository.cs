@@ -20,6 +20,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return TrabajoIntegradorSofttek;
         }
 
+
         public virtual async Task<bool> Insert(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -37,5 +38,21 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        public Task<bool> DeleteLogico(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual async Task<T> GetById(int id)
+        {
+            var entity = await _context.Set<T>().FindAsync(id);
+            return entity;
+        }
+
+        //public async Task<List<Servicio>> GetActivos()
+        //{
+        //    var activeServices = await _context.Servicios.Where(x => x.Estado == true).ToListAsync();
+        //    return activeServices;
+        //}
     }
 }
