@@ -32,6 +32,17 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        public async Task<bool> DeleteLogico(int id)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            if (usuario == null) { return false; }
+
+            usuario.Activo = false;
+
+            _context.Usuarios.Update(usuario);
+            return true;
+        }
+
 
         public async Task<bool> Delete(int id)
         {
