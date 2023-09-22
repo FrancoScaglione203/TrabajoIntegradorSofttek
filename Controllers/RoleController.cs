@@ -9,6 +9,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "Admin")]
     public class RoleController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -39,9 +40,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
-        [Authorize(Policy = "Admin")]
-        [HttpPut("{id}")]
-
+        [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, Role role)
         {
             var result = await _unitOfWork.RoleRepository.Update(role);
@@ -50,8 +49,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
-        [HttpDelete("{id}")]
-
+        [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.RoleRepository.Delete(id);

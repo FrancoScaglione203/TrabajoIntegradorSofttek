@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.Services;
+using TrabajoIntegradorSofttek.Helpers;
+using TrabajoIntegradorSofttek.Infraestructure;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -17,16 +20,31 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
         [HttpGet]
         [Route("Proyectos")]
-        //[Authorize]
-        public async Task<ActionResult<IEnumerable<Proyecto>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var proyectos = await _unitOfWork.ProyectoRepository.GetAll();
+            int pageToShow = 1;
 
-            return proyectos;
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+            var paginateProyectos = PaginateHelper.Paginate(proyectos, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginateProyectos);
         }
+
+
+        [HttpGet]
+        [Route("ProyectosByEstado/{idEstado}")]
+        public async Task<ActionResult<IEnumerable<Servicio>>> GetEstado([FromRoute] int idEstado)
+        {
+            var proyectos = await _unitOfWork.ProyectoRepository.GetEstado(idEstado);
+
+            return Ok(proyectos);
+        }
+
 
         [HttpGet("ProyectoById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
@@ -41,16 +59,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-        [HttpGet]
-        [Route("ProyectosEstado/{estado}")]
-        public async Task<ActionResult<IEnumerable<Servicio>>> GetEstado([FromRoute] int estado)
-        {
-            var proyectos = await _unitOfWork.ProyectoRepository.GetEstado(estado);
-
-            return Ok(proyectos);
-        }
-
-
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
         public async Task<IActionResult> Agregar(AgregarProyectoDto dto)
@@ -61,8 +70,8 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
-
-        [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, AgregarProyectoDto dto)
         {
             var result = await _unitOfWork.ProyectoRepository.Update(new Proyecto(dto, id));
@@ -71,7 +80,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpPut("DeleteLogico/{id}")]
         public async Task<IActionResult> DeleteLogico([FromRoute] int id)
         {
@@ -81,8 +90,8 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-
-        [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.ProyectoRepository.Delete(id);
