@@ -68,14 +68,16 @@ namespace TrabajoIntegradorSofttek
                 });
 
 
-                option.AddPolicy("AdminConsultor", policy =>
+                //option.AddPolicy("AdminConsultor", policy =>
 
-                {
-                    policy.RequireClaim(ClaimTypes.Role, "1");
-                    policy.RequireClaim(ClaimTypes.Role, "2");
+                //{
+                //    policy.RequireClaim(ClaimTypes.Role, "1");
 
-                });
+                //    policy.RequireClaim(ClaimTypes.Role, "2");
+
+                //});
             });
+
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options => options.TokenValidationParameters = new TokenValidationParameters()

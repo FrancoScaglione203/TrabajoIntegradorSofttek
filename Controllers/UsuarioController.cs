@@ -19,7 +19,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        //[Authorize(Policy = "Admin")]
+        
         [HttpGet] 
         [Route("Usuarios")]
         public async Task<IActionResult> GetAll()
@@ -30,10 +30,9 @@ namespace TrabajoIntegradorSofttek.Controllers
             if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
 
             var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
-
             var paginateUsuarios = PaginateHelper.Paginate(usuarios, pageToShow, url);
 
-            return ResponseFactory.CreateSuccessResponse(200, paginateUsuarios); ;
+            return ResponseFactory.CreateSuccessResponse(200, paginateUsuarios);
         }
 
         [HttpGet("UsuarioById/{id}")]
@@ -48,6 +47,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(usuario);
         }
 
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
         public async Task<IActionResult> Agregar(AgregarUsuarioDto dto)
@@ -59,8 +59,8 @@ namespace TrabajoIntegradorSofttek.Controllers
             return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
         }
 
-
-        [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, AgregarUsuarioDto dto)
         {
             var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto, id));
@@ -76,7 +76,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpPut("DeleteLogico/{id}")]
         public async Task<IActionResult> DeleteLogico([FromRoute] int id)
         {
@@ -86,7 +86,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

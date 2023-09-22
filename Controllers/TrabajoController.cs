@@ -4,6 +4,8 @@ using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
 using Microsoft.AspNetCore.Authorization;
 using TrabajoIntegradorSofttek.Services;
+using TrabajoIntegradorSofttek.Helpers;
+using TrabajoIntegradorSofttek.Infraestructure;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -20,12 +22,17 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         [HttpGet]
         [Route("Trabajos")]
-        //[Authorize]
-        public async Task<ActionResult<IEnumerable<Trabajo>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var trabajos = await _unitOfWork.TrabajoRepository.GetAll();
+            int pageToShow = 1;
 
-            return trabajos;
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+            var paginateTrabajos = PaginateHelper.Paginate(trabajos, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginateTrabajos);
         }
 
         [HttpGet("TrabajoById/{id}")]
@@ -40,7 +47,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(trabajo);
         }
 
-
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
         public async Task<IActionResult> Agregar(AgregarTrabajoDto dto)
@@ -51,8 +58,8 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
-
-        [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, AgregarTrabajoDto dto)
         {
             var result = await _unitOfWork.TrabajoRepository.Update(new Trabajo(dto, id));
@@ -61,6 +68,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
+        [Authorize(Policy = "Admin")]
         [HttpPut("DeleteLogico/{id}")]
         public async Task<IActionResult> DeleteLogico([FromRoute] int id)
         {
@@ -70,7 +78,8 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-        [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.TrabajoRepository.Delete(id);

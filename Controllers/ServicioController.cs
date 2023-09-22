@@ -4,6 +4,8 @@ using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.Services;
 using Microsoft.AspNetCore.Authorization;
+using TrabajoIntegradorSofttek.Helpers;
+using TrabajoIntegradorSofttek.Infraestructure;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -18,14 +20,30 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [Authorize(Policy = "Admin")]
+        
         [HttpGet]
         [Route("Servicios")]
-        public async Task<ActionResult<IEnumerable<Servicio>>> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             var servicios = await _unitOfWork.ServicioRepository.GetAll();
+            int pageToShow = 1;
 
-            return servicios;
+            if (Request.Query.ContainsKey("page")) int.TryParse(Request.Query["page"], out pageToShow);
+
+            var url = new Uri($"{Request.Scheme}://{Request.Host}{Request.Path}").ToString();
+            var paginateServicios = PaginateHelper.Paginate(servicios, pageToShow, url);
+
+            return ResponseFactory.CreateSuccessResponse(200, paginateServicios);
+        }
+
+
+        [HttpGet]
+        [Route("ServiciosActivos")]
+        public async Task<ActionResult<IEnumerable<Servicio>>> GetActivos()
+        {
+            var servicios = await _unitOfWork.ServicioRepository.GetActivos();
+
+            return Ok(servicios);
         }
 
         [HttpGet("ServicioById/{id}")]
@@ -40,16 +58,8 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(servicio);
         }
 
-        [HttpGet]
-        [Route("ServiciosActivos")]
-        public async Task<ActionResult<IEnumerable<Servicio>>> GetActivos()
-        {
-            var servicios = await _unitOfWork.ServicioRepository.GetActivos();
 
-            return Ok(servicios);
-        }
-
-
+        [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
         public async Task<IActionResult> Agregar(AgregarServicioDto dto)
@@ -60,8 +70,8 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
-
-        [HttpPut("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, AgregarServicioDto dto)
         {
             var result = await _unitOfWork.ServicioRepository.Update(new Servicio(dto, id));
@@ -70,6 +80,7 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
+        [Authorize(Policy = "Admin")]
         [HttpPut("DeleteLogico/{id}")]
         public async Task<IActionResult> DeleteLogico([FromRoute] int id)
         {
@@ -79,8 +90,8 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
-
-        [HttpDelete("{id}")]
+        [Authorize(Policy = "Admin")]
+        [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var result = await _unitOfWork.ServicioRepository.Delete(id);
