@@ -18,7 +18,10 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-
+        /// <summary>
+        /// Devuelve todos los roles
+        /// </summary>
+        /// <returns>Retorna lista de roles</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Role>>> GetAll()
         {
@@ -28,7 +31,11 @@ namespace TrabajoIntegradorSofttek.Controllers
         }
 
 
-
+        /// <summary>
+        /// Agrega un Role a la base de datos
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Retorna True y Cod 200 cuando se inserto</returns>
         [HttpPost]
         [Route("Role")]
         public async Task<IActionResult> Insert(RoleDto dto)
@@ -40,6 +47,12 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
+        /// <summary>
+        /// Edita el role que se indica por el parametro id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="role"></param>
+        /// <returns>Retorna true y 200 cuando finaliza</returns>
         [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, Role role)
         {
@@ -49,6 +62,11 @@ namespace TrabajoIntegradorSofttek.Controllers
             return Ok(true);
         }
 
+        /// <summary>
+        /// Elimina un Role de forma fisica por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna true finalizada la eliminacion</returns>
         [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {

@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TrabajoIntegradorSofttek.Entities;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.Services;
@@ -19,7 +18,10 @@ namespace TrabajoIntegradorSofttek.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        
+        /// <summary>
+        /// Devuelve todos los usuarios
+        /// </summary>
+        /// <returns>Retorna lista de clase Usuario</returns>
         [HttpGet] 
         [Route("Usuarios")]
         public async Task<IActionResult> GetAll()
@@ -35,18 +37,28 @@ namespace TrabajoIntegradorSofttek.Controllers
             return ResponseFactory.CreateSuccessResponse(200, paginateUsuarios);
         }
 
+        /// <summary>
+        /// Devulve usuario solicitado por parametro id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se obtuvo usuario por id o 500 si no existe usuario con ese id</returns>
         [HttpGet("UsuarioById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var usuario = await _unitOfWork.UsuarioRepository.GetById(id);
             if (usuario == null)
             {
-                return NotFound();
+                return ResponseFactory.CreateErrorResponse(500, "No se encontro ningun usuario con ese id ");
             }
             await _unitOfWork.Complete();
-            return Ok(usuario);
+            return ResponseFactory.CreateSuccessResponse(200, usuario);
         }
 
+        /// <summary>
+        /// Agrega un usuario a la base de datos
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Retorna 201 si agrego con exito o 409 si hubo un error</returns>
         [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
@@ -59,6 +71,12 @@ namespace TrabajoIntegradorSofttek.Controllers
             return ResponseFactory.CreateSuccessResponse(201, "Usuario registrado con exito!");
         }
 
+        /// <summary>
+        /// Actualiza el servicio seleccionado por id por el UsuarioDto que se envia
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="dto"></param>
+        /// <returns>Retorna 200 si se actualizo con exito o 500 si ingresaron id invalido</returns>
         [Authorize(Policy = "Admin")]
         [HttpPut("Editar/{id}")]
         public async Task<IActionResult> Update([FromRoute] int id, AgregarUsuarioDto dto)
@@ -66,7 +84,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto, id));
             if (!result)
             {
-                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el usuario");
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo actualizar el usuario");
             }
             else
             {
@@ -76,16 +94,33 @@ namespace TrabajoIntegradorSofttek.Controllers
 
         }
 
+        /// <summary>
+        /// Cambia a false el estado de la propiedad Activo del usuario seleccionado por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
         [Authorize(Policy = "Admin")]
         [HttpPut("DeleteLogico/{id}")]
         public async Task<IActionResult> DeleteLogico([FromRoute] int id)
         {
             var result = await _unitOfWork.UsuarioRepository.DeleteLogico(id);
-            await _unitOfWork.Complete();
-            return Ok(true);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo eliminar el usuario");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
+            }
 
         }
 
+        /// <summary>
+        /// Elimina fisicamente usuario seleccionado por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
         [Authorize(Policy = "Admin")]
         [HttpDelete("DeleteFisico/{id}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
@@ -99,7 +134,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             else
             {
                 await _unitOfWork.Complete();
-                return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+                return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
             }
         }
 

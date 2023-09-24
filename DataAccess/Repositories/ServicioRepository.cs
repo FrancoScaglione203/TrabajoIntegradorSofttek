@@ -55,5 +55,11 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        //Funcion que devuelva true si existe un servicio con la descripcion que se manda por parametro
+        public async Task<bool> ServicioEx(string Desc)
+        {
+            return await _context.Servicios.AnyAsync(x => x.Descripcion == Desc);
+        }
+
     }
 }

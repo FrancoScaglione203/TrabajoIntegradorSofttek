@@ -54,5 +54,9 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return estadoProyectos;
         }
 
+        public async Task<bool> ProyectoEx(string nombre)
+        {
+            return await _context.Proyectos.AnyAsync(x => x.Nombre == nombre);
+        }
     }
 }
