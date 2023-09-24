@@ -22,6 +22,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// Devuelve todos los usuarios
         /// </summary>
         /// <returns>Retorna lista de clase Usuario</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet] 
         [Route("Usuarios")]
         public async Task<IActionResult> GetAll()
@@ -42,6 +43,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Retorna 200 si se obtuvo usuario por id o 500 si no existe usuario con ese id</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet("UsuarioById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
