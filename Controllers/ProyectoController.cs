@@ -23,6 +23,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// Devuelve todos los proyectos
         /// </summary>
         /// <returns>Retorna una lista de la clase Proyecto</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet]
         [Route("Proyectos")]
         public async Task<IActionResult> GetAll()
@@ -43,6 +44,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// </summary>
         /// <param name="idEstado"></param>
         /// <returns>Retorna lista de proyectos con Estado = idEstado</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet]
         [Route("ProyectosByEstado/{idEstado}")]
         public async Task<IActionResult> GetEstado([FromRoute] int idEstado)
@@ -63,6 +65,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Retorna 200 si se obtuvo servicio por id o 500 si no existe servicio con ese id</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet("ProyectoById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {

@@ -23,6 +23,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// Devuelve todos los Servicios
         /// </summary>
         /// <returns>Retorna una lista de la clase Servicio</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet]
         [Route("Servicios")]
         public async Task<IActionResult> GetAll()
@@ -42,6 +43,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// Devuelve todos los servicios activos
         /// </summary>
         /// <returns>Retorna lista de servicios con Activo=true</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet]
         [Route("ServiciosActivos")]
         public async Task<IActionResult> GetActivos()
@@ -62,6 +64,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Retorna 200 si se obtuvo servicio por id o 500 si no existe servicio con ese id</returns>
+        [Authorize(Policy = "AdminConsultor")]
         [HttpGet("ServicioById/{id}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {

@@ -62,20 +62,15 @@ namespace TrabajoIntegradorSofttek
             builder.Services.AddAuthorization(option =>
             {
                 option.AddPolicy("Admin", policy =>
-
                 {
                     policy.RequireClaim(ClaimTypes.Role, "1");
                 });
 
+                option.AddPolicy("AdminConsultor", policy =>
 
-                //option.AddPolicy("AdminConsultor", policy =>
-
-                //{
-                //    policy.RequireClaim(ClaimTypes.Role, "1");
-
-                //    policy.RequireClaim(ClaimTypes.Role, "2");
-
-                //});
+                {
+                    policy.RequireClaim(ClaimTypes.Role, "1", "2");
+                });
             });
 
 

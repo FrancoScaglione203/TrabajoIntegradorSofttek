@@ -36,5 +36,24 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        public async Task<bool> RoleEx(string nombre)
+        {
+            return await _context.Roles.AnyAsync(x => x.Name == nombre);
+        }
+
+        Task<List<Usuario>> IRepository<Usuario>.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Usuario> IRepository<Usuario>.GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> Update(Usuario entity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
