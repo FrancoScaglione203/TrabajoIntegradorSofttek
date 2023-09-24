@@ -4,6 +4,7 @@ using TrabajoIntegradorSofttek.Helpers;
 using TrabajoIntegradorSofttek.Services;
 using TrabajoIntegradorSofttek.DTOs;
 using System.Security.Claims;
+using TrabajoIntegradorSofttek.Infraestructure;
 
 namespace TrabajoIntegradorSofttek.Controllers
 {
@@ -20,12 +21,17 @@ namespace TrabajoIntegradorSofttek.Controllers
             _tokenJwtHelper = new TokenJwtHelper(configuration);
         }
 
+        /// <summary>
+        /// Login con cuil y clave de Usuario
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Retorna 200 si se loguea o 401 si algun dato es incorrecto</returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Login(AuthenticateDto dto)
         {
             var usuarioCredentials = await _unitOfWork.UsuarioRepository.AuthenticateCredentials(dto);
-            if (usuarioCredentials is null) return Unauthorized("Las credenciales son incorrectas");
+            if (usuarioCredentials is null) return ResponseFactory.CreateErrorResponse(401, "Las credenciales son incorrectas");
 
             var token = _tokenJwtHelper.GenerateToken(usuarioCredentials);       
 
@@ -39,7 +45,7 @@ namespace TrabajoIntegradorSofttek.Controllers
             };
 
 
-            return Ok(usuario);
+            return ResponseFactory.CreateSuccessResponse(200, usuario);
 
         }
     }

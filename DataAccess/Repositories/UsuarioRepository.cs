@@ -5,6 +5,7 @@ using TrabajoIntegradorSofttek.DataAccess.Repositories.Interfaces;
 using TrabajoIntegradorSofttek.DTOs;
 using TrabajoIntegradorSofttek.DataAccess.Repositories;
 using TrabajoIntegradorSofttek.Helpers;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 {
@@ -60,6 +61,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return await _context.Usuarios.Include(x=> x.Role).SingleOrDefaultAsync(x => x.Cuil == dto.Cuil && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil));
         }
 
+        //Funcion que devuelva true si existe un usuario con el cuil que se envio por parametros
         public async Task<bool> UsuarioEx(long cuil)
         {
             return await _context.Usuarios.AnyAsync(x => x.Cuil == cuil);
