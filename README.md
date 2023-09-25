@@ -7,13 +7,15 @@ https://drive.google.com/file/d/1yIRq0M9FdApUU2c8_OUoryahJM9B9cO8/view
 Será el punto de entrada a la API. En los controladores deberíamos definir la menor cantidad de lógica posible y utilizarlos como un pasamanos con la capa de servicios.
 ​
 ### **Capa DataAccess**
-Es donde definiremos el DbContext,crearemos los seeds y tambien donde se encuentra la capa repositories
+Es donde definiremos el DbContext. Ademas, tiene dos subcapas
+*	DataBaseSeeding: donde se encuentran las seeds de cada entidad para realizar Migration con EntityFrameWork
+*	Repositories: donde definiremos las clases e interfaces correspondientes para realizar el repositorio genérico y la unidad de trabajo
 
-### **Capa Repositories**
-En esta capa definiremos las clases correspondientes para realizar el repositorio genérico y la unidad de trabajo
+### **Capa DTOS**
+En esta capa estan definidos todos los DataTransferObjects.
 
 ### **Capa Entities**
-En este nivel de la arquitectura definiremos todas las entidades de la base de datos.
+En esta capa estan definidas todas las entidades 
 ​
 ### **Capa Helpers**
 Definiremos lógica que pueda ser de utilidad para todo el proyecto. En este caso el paginado, el encriptamiento de clave y el generador de JWT
@@ -21,9 +23,12 @@ Definiremos lógica que pueda ser de utilidad para todo el proyecto. En este cas
 ### **Capa Infrastucture**
 En esta capa se encuentran clases para el manejo de la comunicacion por medio de protocolos http
 
+### **Capa Services**
+Capa donde se encuentra clase e interfaz UnitOfWorkService
+
 ​
 ## **Especificación de GIT**​
-* Se deberán crear las ramas a partir de DEV. La nomenclatura para el nombre de las ramas será la sigueinte: Feature/Us-xx (donde xx corresponde con el número de historia)
+* Se crean ramas a partir de la rama Develop. La nomenclatura para el nombre de las ramas será la sigueinte: Feature/xx-Titulo (donde xx corresponde con el número de historia)
 * El título del pull request debe contener el título de la historia tomada.
 
 ## **Autor**
