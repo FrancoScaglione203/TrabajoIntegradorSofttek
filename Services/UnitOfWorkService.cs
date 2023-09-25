@@ -3,6 +3,9 @@ using TrabajoIntegradorSofttek.DataAccess.Repositories;
 
 namespace TrabajoIntegradorSofttek.Services
 {
+    /// <summary>
+    /// Implementación de la interfaz IUnitOfWork que proporciona acceso a los repositorios de entidades de la base de datos
+    /// </summary>
     public class UnitOfWorkService : IUnitOfWork
     {
         private readonly ApplicationDbContext _context;
@@ -13,6 +16,10 @@ namespace TrabajoIntegradorSofttek.Services
         public RoleRepository RoleRepository { get; private set; }
 
 
+        /// <summary>
+        /// Inicializa una nueva instancia de la clase UnitOfWorkService con el contexto de base de datos proporcionado
+        /// </summary>
+        /// <param name="context"></param>
         public UnitOfWorkService(ApplicationDbContext context)
         {
             _context = context;

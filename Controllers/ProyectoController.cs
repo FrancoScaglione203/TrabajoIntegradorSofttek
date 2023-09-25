@@ -86,7 +86,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
-        public async Task<IActionResult> Agregar(AgregarProyectoDto dto)
+        public async Task<IActionResult> Agregar(ProyectoDto dto)
         {
             if (await _unitOfWork.ProyectoRepository.ProyectoEx(dto.Nombre)) return ResponseFactory.CreateErrorResponse(409, $"Ya existe un proyecto registrado con el nombre:{dto.Nombre}");
             var proyecto = new Proyecto(dto);
@@ -103,7 +103,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
         [Authorize(Policy = "Admin")]
         [HttpPut("Editar/{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, AgregarProyectoDto dto)
+        public async Task<IActionResult> Update([FromRoute] int id, ProyectoDto dto)
         {
             var result = await _unitOfWork.ProyectoRepository.Update(new Proyecto(dto, id));
             if (!result)
@@ -115,6 +115,27 @@ namespace TrabajoIntegradorSofttek.Controllers
                 await _unitOfWork.Complete();
                 return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
             };
+        }
+
+        /// <summary>
+        /// Cambia a true el estado de la propiedad Activo del trabajo seleccionado por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        [Authorize(Policy = "Admin")]
+        [HttpPut("AltaLogico/{id}")]
+        public async Task<IActionResult> AltaLogico([FromRoute] int id)
+        {
+            var result = await _unitOfWork.ProyectoRepository.AltaLogico(id);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo activar el trabajo");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Activado");
+            }
         }
 
         /// <summary>
@@ -136,7 +157,6 @@ namespace TrabajoIntegradorSofttek.Controllers
                 await _unitOfWork.Complete();
                 return ResponseFactory.CreateSuccessResponse(200, "Eliminado");
             }
-
         }
 
         /// <summary>

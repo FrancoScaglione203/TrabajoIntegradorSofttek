@@ -6,7 +6,7 @@ namespace TrabajoIntegradorSofttek.Entities
 {
     public class Proyecto
     {
-        public Proyecto(AgregarProyectoDto dto)
+        public Proyecto(ProyectoDto dto)
         {
             Nombre = dto.Nombre;
             Direccion = dto.Direccion;
@@ -14,7 +14,7 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
-        public Proyecto(AgregarProyectoDto dto, int id)
+        public Proyecto(ProyectoDto dto, int id)
         {
             Id = id;
             Nombre = dto.Nombre;
