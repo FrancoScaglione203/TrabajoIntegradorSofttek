@@ -85,7 +85,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
-        public async Task<IActionResult> Agregar(AgregarServicioDto dto)
+        public async Task<IActionResult> Agregar(ServicioDto dto)
         {
             if (await _unitOfWork.ServicioRepository.ServicioEx(dto.Descripcion)) return ResponseFactory.CreateErrorResponse(409, $"Ya existe un servicio registrado con la descripcion:{dto.Descripcion}");
             var servicio = new Servicio(dto);
@@ -102,7 +102,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
         [Authorize(Policy = "Admin")]
         [HttpPut("Editar/{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, AgregarServicioDto dto)
+        public async Task<IActionResult> Update([FromRoute] int id, ServicioDto dto)
         {
             var result = await _unitOfWork.ServicioRepository.Update(new Servicio(dto, id));
             if (!result)
@@ -113,6 +113,27 @@ namespace TrabajoIntegradorSofttek.Controllers
             {
                 await _unitOfWork.Complete();
                 return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
+        }
+
+        /// <summary>
+        /// Cambia a true el estado de la propiedad Activo del servicio seleccionado por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        [Authorize(Policy = "Admin")]
+        [HttpPut("AltaLogico/{id}")]
+        public async Task<IActionResult> AltaLogico([FromRoute] int id)
+        {
+            var result = await _unitOfWork.ServicioRepository.AltaLogico(id);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo activar el servicio");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Activado");
             }
         }
 

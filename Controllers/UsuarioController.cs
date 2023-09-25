@@ -64,7 +64,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         [Authorize(Policy = "Admin")]
         [HttpPost]
         [Route("Agregar")]
-        public async Task<IActionResult> Agregar(AgregarUsuarioDto dto)
+        public async Task<IActionResult> Agregar(UsuarioDto dto)
         {
             if (await _unitOfWork.UsuarioRepository.UsuarioEx(dto.Cuil)) return ResponseFactory.CreateErrorResponse(409, $"Ya existe un usuario registrado con el cuil:{dto.Cuil}");
             var usuario = new Usuario(dto);
@@ -81,7 +81,7 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// <returns>Retorna 200 si se actualizo con exito o 500 si ingresaron id invalido</returns>
         [Authorize(Policy = "Admin")]
         [HttpPut("Editar/{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, AgregarUsuarioDto dto)
+        public async Task<IActionResult> Update([FromRoute] int id, UsuarioDto dto)
         {
             var result = await _unitOfWork.UsuarioRepository.Update(new Usuario(dto, id));
             if (!result)
@@ -92,6 +92,28 @@ namespace TrabajoIntegradorSofttek.Controllers
             {
                 await _unitOfWork.Complete();
                 return ResponseFactory.CreateSuccessResponse(200, "Actualizado");
+            }
+
+        }
+
+        /// <summary>
+        /// Cambia a true el estado de la propiedad Activo del usuario seleccionado por id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        [Authorize(Policy = "Admin")]
+        [HttpPut("AltaLogico/{id}")]
+        public async Task<IActionResult> AltaLogico([FromRoute] int id)
+        {
+            var result = await _unitOfWork.UsuarioRepository.AltaLogico(id);
+            if (!result)
+            {
+                return ResponseFactory.CreateErrorResponse(500, "No se pudo activar el usuario");
+            }
+            else
+            {
+                await _unitOfWork.Complete();
+                return ResponseFactory.CreateSuccessResponse(200, "Activado");
             }
 
         }

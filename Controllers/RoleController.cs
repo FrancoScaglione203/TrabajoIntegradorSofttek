@@ -56,9 +56,9 @@ namespace TrabajoIntegradorSofttek.Controllers
         /// <param name="role"></param>
         /// <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
         [HttpPut("Editar/{id}")]
-        public async Task<IActionResult> Update([FromRoute] int id, Role role)
+        public async Task<IActionResult> Update([FromRoute] int id, RoleDto dto)
         {
-            var result = await _unitOfWork.RoleRepository.Update(role);
+            var result = await _unitOfWork.RoleRepository.Update(new Role(dto, id));
 
             if (!result)
             {

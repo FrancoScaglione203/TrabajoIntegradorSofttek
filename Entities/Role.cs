@@ -14,8 +14,16 @@ namespace TrabajoIntegradorSofttek.Entities
         [Column("role_activo")]
         public bool Activo { get; set; }
 
+        public Role(RoleDto dto, int id)
+        {
+            Id = id;
+            Name = dto.Name;
+            Description = dto.Description;
+            Activo = dto.Activo;
+        }
         public Role(RoleDto dto)
         {
+
             Name = dto.Name;
             Description = dto.Description;
             Activo = dto.Activo;

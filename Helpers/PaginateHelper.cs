@@ -4,6 +4,14 @@ namespace TrabajoIntegradorSofttek.Helpers
 {
     public class PaginateHelper
     {
+        /// <summary>
+        /// Realiza la paginación de una lista de objetos tipo T y genera un objeto PaginateDataDto.
+        /// </summary>
+        /// <typeparam name="T">El tipo de elementos contenidos en la lista.</typeparam>
+        /// <param name="itemsToPaginate">La lista de elementos a paginar.</param>
+        /// <param name="currentPage">El número de página actual.</param>
+        /// <param name="url">La URL base utilizada para construir las URL de página anterior y siguiente.</param>
+        /// <returns>Un objeto PaginateDataDto que contiene los datos del paginado.</returns>
         public static PaginateDataDto<T> Paginate<T>(List<T> itemsToPaginate, int currentPage, string url)
         {
             int pageSize = 10;

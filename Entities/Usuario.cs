@@ -7,7 +7,7 @@ namespace TrabajoIntegradorSofttek.Entities
 {
     public class Usuario
     {
-        public Usuario(AgregarUsuarioDto dto)
+        public Usuario(UsuarioDto dto)
         {
             Nombre = dto.Nombre;
             Dni = dto.Dni;
@@ -17,7 +17,7 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
-        public Usuario(AgregarUsuarioDto dto, int id)
+        public Usuario(UsuarioDto dto, int id)
         {
             Id = id;
             Nombre = dto.Nombre;

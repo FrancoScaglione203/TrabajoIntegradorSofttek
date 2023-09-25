@@ -17,6 +17,11 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 
         }
 
+        /// <summary>
+        /// Actualiza el usuario con el id de updateUsuario por el mismo 
+        /// </summary>
+        /// <param name="updateUsuario"></param>
+        /// <returns>Retorna true si se actualizo o false si hubo algun error</returns>
         public override async Task<bool> Update(Usuario updateUsuario)
         {
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == updateUsuario.Id);
@@ -33,6 +38,27 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        /// <summary>
+        /// Actualiza Activo = true del trabajo con el id enviado por parametro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna true si se actualizo o false si hubo algun error</returns>
+        public async Task<bool> AltaLogico(int id)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            if (usuario == null) { return false; }
+
+            usuario.Activo = true;
+
+            _context.Usuarios.Update(usuario);
+            return true;
+        }
+
+        /// <summary>
+        /// Actualiza Activo = false del trabajo con el id enviado por parametro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna true si se actualizo o false si hubo algun error</returns>
         public async Task<bool> DeleteLogico(int id)
         {
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
@@ -44,7 +70,11 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
-
+        /// <summary>
+        /// BGorra fisicamente el trabajo con el id enviado por parametro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna true una vez finalizado el borrado</returns>
         public async Task<bool> Delete(int id)
         {
             var user = await _context.Usuarios.Where(x => x.Id == id).FirstOrDefaultAsync();
@@ -56,12 +86,21 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return true;
         }
 
+        /// <summary>
+        /// Devuelve Usuario que tenga Cuil y clave iguales a las del AuthenticateDto que se envia por parametro
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>Si coincide cuil y clave retorna el usuario sino retorna Null</returns>
         public async Task<Usuario?> AuthenticateCredentials(AuthenticateDto dto)
         {
             return await _context.Usuarios.Include(x=> x.Role).SingleOrDefaultAsync(x => x.Cuil == dto.Cuil && x.Clave == PasswordEncryptHelper.EncryptPassword(dto.Clave, dto.Cuil));
         }
 
-        //Funcion que devuelva true si existe un usuario con el cuil que se envio por parametros
+        /// <summary>
+        /// Valida si ya existe un usuario con el cuil que se envia por parametro
+        /// </summary>
+        /// <param name="cuil"></param>
+        /// <returns>Retorna true si ya existe o false si no existe</returns>
         public async Task<bool> UsuarioEx(long cuil)
         {
             return await _context.Usuarios.AnyAsync(x => x.Cuil == cuil);

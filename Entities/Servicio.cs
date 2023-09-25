@@ -7,7 +7,7 @@ namespace TrabajoIntegradorSofttek.Entities
 {
     public class Servicio
     {
-        public Servicio(AgregarServicioDto dto)
+        public Servicio(ServicioDto dto)
         {
             Descripcion = dto.Descripcion;
             Estado = dto.Estado;
@@ -15,7 +15,7 @@ namespace TrabajoIntegradorSofttek.Entities
             Activo = true;
         }
 
-        public Servicio(AgregarServicioDto dto, int id)
+        public Servicio(ServicioDto dto, int id)
         {
             Id = id;
             Descripcion = dto.Descripcion;

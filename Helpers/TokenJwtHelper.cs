@@ -8,16 +8,21 @@ namespace TrabajoIntegradorSofttek.Helpers
 {
     public class TokenJwtHelper
     {
-        private IConfiguration _configuration;  //El Iconfiguration trae la clave valor
+        private IConfiguration _configuration;  
         public TokenJwtHelper(IConfiguration configuration)
         {
 
             _configuration = configuration;
         }
 
+        /// <summary>
+        /// Genera un token JWT basado en la informacion del usuario.
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>El token JWT generado como una cadena.</returns>
         public string GenerateToken(Usuario usuario)
         {
-            var claims = new[]   //La claim manda todo lo que necesita el token que esta en el .jason
+            var claims = new[]   
             {
                 new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                 new Claim("Cuil",usuario.Cuil.ToString()),
@@ -30,7 +35,7 @@ namespace TrabajoIntegradorSofttek.Helpers
 
             var securityToken = new JwtSecurityToken(
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(60),  //El tiempo que dura
+                expires: DateTime.Now.AddMinutes(60),  //Tiempo de duracion del Token
                 signingCredentials: credentials
                 );
 

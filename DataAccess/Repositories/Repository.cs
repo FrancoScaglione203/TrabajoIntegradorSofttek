@@ -14,13 +14,21 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             _context = context;
         }
 
+        /// <summary>
+        /// Devuelve lista de clase generica
+        /// </summary>
+        /// <returns>Retorna lista de objetos tipo T</returns>
         public virtual async Task<List<T>> GetAll()
         {
             var TrabajoIntegradorSofttek = await _context.Set<T>().ToListAsync();
             return TrabajoIntegradorSofttek;
         }
 
-
+        /// <summary>
+        /// Inserta objeto tipo T en base de datos
+        /// </summary>
+        /// <param name="entity"></param>
+        /// <returns>Retorna true luego de insertar el objeto</returns>
         public virtual async Task<bool> Insert(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
@@ -43,16 +51,15 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Devuelve objeto tipo T con id enviado por parametro
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna el objeto tipo T con el id enviado</returns>
         public virtual async Task<T> GetById(int id)
         {
             var entity = await _context.Set<T>().FindAsync(id);
             return entity;
         }
-
-        //public async Task<List<Servicio>> GetActivos()
-        //{
-        //    var activeServices = await _context.Servicios.Where(x => x.Estado == true).ToListAsync();
-        //    return activeServices;
-        //}
     }
 }
