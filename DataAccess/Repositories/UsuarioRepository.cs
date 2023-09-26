@@ -16,6 +16,26 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
         {
 
         }
+        /// <summary>
+        /// Devuelve todos los usuarios con clave = null por seguridad
+        /// </summary>
+        /// <returns>Retorna lista de usuarios con clave = null</returns>
+        public override async Task<List<Usuario>> GetAll()
+        {
+            var usuarios = await _context.Usuarios.ToListAsync();
+            foreach (var usuario in usuarios)
+            {
+                usuario.Clave = "**********";
+            }
+            return usuarios;   
+        }
+
+        public override async Task<Usuario> GetById(int id)
+        {
+            var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
+            usuario.Clave = "**********";
+            return usuario;
+        }
 
         /// <summary>
         /// Actualiza el usuario con el id de updateUsuario por el mismo 
