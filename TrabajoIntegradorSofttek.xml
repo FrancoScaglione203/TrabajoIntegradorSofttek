@@ -1,0 +1,538 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TrabajoIntegradorSofttek</name>
+    </assembly>
+    <members>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.LoginController.Login(TrabajoIntegradorSofttek.DTOs.AuthenticateDto)">
+            <summary>
+            Login con cuil y clave de Usuario
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 200 si se loguea o 401 si algun dato es incorrecto</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.GetAll">
+            <summary>
+            Devuelve todos los proyectos
+            </summary>
+            <returns>Retorna una lista de la clase Proyecto</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.GetEstado(System.Int32)">
+            <summary>
+            Devuelve lista de proyectos con Estado igual a IdEstado enviado por parametro
+            </summary>
+            <param name="idEstado"></param>
+            <returns>Retorna lista de proyectos con Estado = idEstado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.GetById(System.Int32)">
+            <summary>
+            Devuelve el proyecto con el id ingresado
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se obtuvo servicio por id o 500 si no existe servicio con ese id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.Agregar(TrabajoIntegradorSofttek.DTOs.ProyectoDto)">
+            <summary>
+            Agrega un proyecto a la base de datos
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 201 si agrego con exito o 409 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.Update(System.Int32,TrabajoIntegradorSofttek.DTOs.ProyectoDto)">
+            <summary>
+            Actualiza el servicio seleccionado por id por el proyectoDto que se envia
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true el estado de la propiedad Activo del trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false el estado de la propiedad Activo del trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ProyectoController.Delete(System.Int32)">
+            <summary>
+            Elimina fisicamente trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.RoleController.GetAll">
+            <summary>
+            Devuelve todos los roles
+            </summary>
+            <returns>Retorna lista de roles</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.RoleController.Insert(TrabajoIntegradorSofttek.DTOs.RoleDto)">
+            <summary>
+            Agrega un Role a la base de datos
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 409 si ya existe rol con descripcion ingresada y Cod 201 cuando se inserto correctamente</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.RoleController.Update(System.Int32,TrabajoIntegradorSofttek.DTOs.RoleDto)">
+            <summary>
+            Edita el role que se indica por el parametro id con los parametros que se mandan por RoleDto
+            </summary>
+            <param name="id"></param>
+            <param name="role"></param>
+            <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.RoleController.Delete(System.Int32)">
+            <summary>
+            Elimina un Role de forma fisica por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.GetAll">
+            <summary>
+            Devuelve todos los Servicios
+            </summary>
+            <returns>Retorna una lista de la clase Servicio</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.GetActivos">
+            <summary>
+            Devuelve todos los servicios activos
+            </summary>
+            <returns>Retorna lista de servicios con Activo=true</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.GetById(System.Int32)">
+            <summary>
+            Devuelve el usuario con el id ingresado
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se obtuvo servicio por id o 500 si no existe servicio con ese id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.Agregar(TrabajoIntegradorSofttek.DTOs.ServicioDto)">
+            <summary>
+            Agrega un Servicio a la base de datos
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 201 si agrego con exito o 409 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.Update(System.Int32,TrabajoIntegradorSofttek.DTOs.ServicioDto)">
+            <summary>
+            Actualiza el servicio seleccionado por id por el servicioDto que se envia
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns>Retorna 200 si se actualizo con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true el estado de la propiedad Activo del servicio seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false el estado de la propiedad Activo del servicio seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.ServicioController.Delete(System.Int32)">
+            <summary>
+            Elimina fisicamente servicio seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.GetAll">
+            <summary>
+            Devuelve todos los trabajos
+            </summary>
+            <returns>Retorna una lista de la clase Trabajo</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.GetById(System.Int32)">
+            <summary>
+            Devuelve el trabajo con el id ingresado
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se obtuvo trabajo por id o 500 si no existe trabajo con ese id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.Agregar(TrabajoIntegradorSofttek.DTOs.TrabajoDto)">
+            <summary>
+            Agrega un trabajo a la base de datos
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 201 y agrega a base de datos</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.Update(System.Int32,TrabajoIntegradorSofttek.DTOs.TrabajoDto)">
+            <summary>
+            Actualiza el trabajo seleccionado por id por el trabajoDto que se envia
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns>Retorna 200 si se actualizo con exito o 500 hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true el estado de la propiedad Activo del trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false el estado de la propiedad Activo del trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.TrabajoController.Delete(System.Int32)">
+            <summary>
+            Elimina fisicamente servicio seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.GetAll">
+            <summary>
+            Devuelve todos los usuarios
+            </summary>
+            <returns>Retorna lista de clase Usuario</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.GetById(System.Int32)">
+            <summary>
+            Devulve usuario solicitado por parametro id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se obtuvo usuario por id o 500 si no existe usuario con ese id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.Agregar(TrabajoIntegradorSofttek.DTOs.UsuarioDto)">
+            <summary>
+            Agrega un usuario a la base de datos
+            </summary>
+            <param name="dto"></param>
+            <returns>Retorna 201 si agrego con exito o 409 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.Update(System.Int32,TrabajoIntegradorSofttek.DTOs.UsuarioDto)">
+            <summary>
+            Actualiza el servicio seleccionado por id por el UsuarioDto que se envia
+            </summary>
+            <param name="id"></param>
+            <param name="dto"></param>
+            <returns>Retorna 200 si se actualizo con exito o 500 si ingresaron id invalido</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true el estado de la propiedad Activo del usuario seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false el estado de la propiedad Activo del usuario seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se modifico con exito o 500 si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Controllers.UsuarioController.Delete(System.Int32)">
+            <summary>
+            Elimina fisicamente usuario seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna 200 si se elimino con exito o 500 si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.Update(TrabajoIntegradorSofttek.Entities.Proyecto)">
+            <summary>
+            Busca el id del proyecto enviado por parametro y luego lo remplaza con los datos del mismo
+            </summary>
+            <param name="updateProyecto"></param>
+            <returns>Retorna true si se actualizo correctamente o false si no hay ninguno con ese id para actualizar</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.AltaLogico(System.Int32)">
+            <summary>
+            Busca el proyecto por el id que se envia por parametro y cambia Activo = true
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se modifico correctamente o false si no se encontro el id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.DeleteLogico(System.Int32)">
+            <summary>
+            Busca el proyecto por el id que se envia por parametro y cambia Activo = false
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se modifico correctamente o false si no se encontro el id</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.Delete(System.Int32)">
+            <summary>
+            Borra de forma fisica el proyecto con el id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true una vez finalizado el borrado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.GetEstado(System.Int32)">
+            <summary>
+            Devuelve lista de proyectos filtrados por el Estado que se envia por parametro
+            </summary>
+            <param name="estado"></param>
+            <returns>Retorna lista de proyectos con el estado seleccionado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ProyectoRepository.ProyectoEx(System.String)">
+            <summary>
+            Funcion que valida si ya existe un proyecto con el nombre que se envia por parametro
+            </summary>
+            <param name="nombre"></param>
+            <returns>Retorna true si encontro uno con el mimsmo nombre o false si no encontro ninguno</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.Repository`1.GetAll">
+            <summary>
+            Devuelve lista de clase generica
+            </summary>
+            <returns>Retorna lista de objetos tipo T</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.Repository`1.Insert(`0)">
+            <summary>
+            Inserta objeto tipo T en base de datos
+            </summary>
+            <param name="entity"></param>
+            <returns>Retorna true luego de insertar el objeto</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.Repository`1.GetById(System.Int32)">
+            <summary>
+            Devuelve objeto tipo T con id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna el objeto tipo T con el id enviado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.RoleRepository.Update(TrabajoIntegradorSofttek.Entities.Role)">
+            <summary>
+            Funcion para actualizar el Role con el id del UpdateRole que se envia por parametro
+            </summary>
+            <param name="updateRole"></param>
+            <returns>Retorna true si se actualizo correctamente o false si hubo un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.RoleRepository.Delete(System.Int32)">
+            <summary>
+            Borra de forma fisica el role con el id que se envia por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true una vez finalizo el borrado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.RoleRepository.RoleEx(System.String)">
+            <summary>
+            Valida si ya existe un Role con el nombre que se envia por parametro
+            </summary>
+            <param name="nombre"></param>
+            <returns>Retorna true si ya hay un role con ese nombre o false si no lo hay</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.GetActivos">
+            <summary>
+            Devuelve lista de Servicios con Activo = true
+            </summary>
+            <returns>Retorna lista de serivicios con propiedad Activo = true</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.Update(TrabajoIntegradorSofttek.Entities.Servicio)">
+            <summary>
+            Actualiza el servicio con el id del updateServicio que se envia por parametro
+            </summary>
+            <param name="updateServicio"></param>
+            <returns>Retorna true si se actualizo o false si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true el estado de la propiedad Activo
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualiza correctamente o false si ocurrio algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false el estado de la propiedad Activo
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualiza correctamente o false si ocurrio algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.Delete(System.Int32)">
+            <summary>
+            Borra fisicamente el servicio con el id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true una vez realizado el borrado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.ServicioRepository.ServicioEx(System.String)">
+            <summary>
+            Valida si ya existe un Servicio con la descripcion que se envia por parametro
+            </summary>
+            <param name="Desc"></param>
+            <returns>Retorna true si ya existe servicio con esa descripcion o false si no existe</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.TrabajoRepository.Update(TrabajoIntegradorSofttek.Entities.Trabajo)">
+            <summary>
+            Actualiza el trabajo que tiene el id de UpdateTrabajo y lo remplaza por el mismo
+            </summary>
+            <param name="updateTrabajo"></param>
+            <returns>Retorna true si se actualizo correctamente o false si ocurre un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.TrabajoRepository.AltaLogico(System.Int32)">
+            <summary>
+            Cambia a true la propiedad Activo del trabajo con id igual al enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualizo correctamente o false si ocurre un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.TrabajoRepository.DeleteLogico(System.Int32)">
+            <summary>
+            Cambia a false la propiedad Activo del trabajo con id igual al enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualizo correctamente o false si ocurre un error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.TrabajoRepository.Delete(System.Int32)">
+            <summary>
+            Borra fisicamente el trabajo seleccionado por id
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true una vez finalizado el borrado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.GetAll">
+            <summary>
+            Devuelve todos los usuarios con clave = null por seguridad
+            </summary>
+            <returns>Retorna lista de usuarios con clave = null</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.GetById(System.Int32)">
+            <summary>
+            Devuelve usuario sin clave por seguridad
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna usuario con la clave tapada por seguridad</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.Update(TrabajoIntegradorSofttek.Entities.Usuario)">
+            <summary>
+            Actualiza el usuario con el id de updateUsuario por el mismo 
+            </summary>
+            <param name="updateUsuario"></param>
+            <returns>Retorna true si se actualizo o false si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.AltaLogico(System.Int32)">
+            <summary>
+            Actualiza Activo = true del trabajo con el id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualizo o false si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.DeleteLogico(System.Int32)">
+            <summary>
+            Actualiza Activo = false del trabajo con el id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true si se actualizo o false si hubo algun error</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.Delete(System.Int32)">
+            <summary>
+            BGorra fisicamente el trabajo con el id enviado por parametro
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna true una vez finalizado el borrado</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.AuthenticateCredentials(TrabajoIntegradorSofttek.DTOs.AuthenticateDto)">
+            <summary>
+            Devuelve Usuario que tenga Cuil y clave iguales a las del AuthenticateDto que se envia por parametro
+            </summary>
+            <param name="dto"></param>
+            <returns>Si coincide cuil y clave retorna el usuario sino retorna Null</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.UsuarioEx(System.Int64)">
+            <summary>
+            Valida si ya existe un usuario con el cuil que se envia por parametro
+            </summary>
+            <param name="cuil"></param>
+            <returns>Retorna true si ya existe o false si no existe</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Helpers.PaginateHelper.Paginate``1(System.Collections.Generic.List{``0},System.Int32,System.String)">
+            <summary>
+            Realiza la paginación de una lista de objetos tipo T y genera un objeto PaginateDataDto.
+            </summary>
+            <typeparam name="T">El tipo de elementos contenidos en la lista.</typeparam>
+            <param name="itemsToPaginate">La lista de elementos a paginar.</param>
+            <param name="currentPage">El número de página actual.</param>
+            <param name="url">La URL base utilizada para construir las URL de página anterior y siguiente.</param>
+            <returns>Un objeto PaginateDataDto que contiene los datos del paginado.</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Helpers.PasswordEncryptHelper.EncryptPassword(System.String,System.Int64)">
+            <summary>
+            Método que cifra una contraseña utilizando una técnica de saltin1g a partir del cuil y contraseña.
+            </summary>
+            <param name="password"></param>
+            <param name="cuil"></param>
+            <returns>La contraseña cifrada </returns>   
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Helpers.PasswordEncryptHelper.CreateSalt(System.String)">
+            <summary>
+            Método privado para generar un salt único basado en el cuil del usuario.
+            </summary>
+            <param name="cuil"></param>
+            <returns>Una cadena que representa el salt generado.</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Helpers.TokenJwtHelper.GenerateToken(TrabajoIntegradorSofttek.Entities.Usuario)">
+            <summary>
+            Genera un token JWT basado en la informacion del usuario.
+            </summary>
+            <param name="usuario"></param>
+            <returns>El token JWT generado como una cadena.</returns>
+        </member>
+        <member name="P:TrabajoIntegradorSofttek.Infraestructure.ApiErrorResponse.Status">
+            <summary>
+            Representa una respuesta HTTP de error que contiene un código de estado y una lista de errores.
+            </summary>
+        </member>
+        <member name="T:TrabajoIntegradorSofttek.Infraestructure.ApiErrorResponse.ResponseError">
+            <summary>
+            Representa un error individual dentro de la respuesta de error.
+            </summary>
+        </member>
+        <member name="P:TrabajoIntegradorSofttek.Infraestructure.ApiSuccessResponse.Status">
+            <summary>
+            Representa una respuesta HTTP exitosa que contiene un código de estado y datos.
+            </summary>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Infraestructure.ResponseFactory.CreateSuccessResponse(System.Int32,System.Object)">
+            <summary>
+            Crea una respuesta HTTP de éxito con el código de estado especificado y datos proporcionados por parametro.
+            </summary>
+            <param name="statusCode"></param>
+            <param name="data"></param>
+            <returns>Una instancia de IActionResult que representa una respuesta de éxito.</returns>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Infraestructure.ResponseFactory.CreateErrorResponse(System.Int32,System.String[])">
+            <summary>
+            Crea una respuesta HTTP de error con el código de estado especificado y mensajes de error
+            </summary>
+            <param name="statusCode"></param>
+            <param name="errors"></param>
+            <returns>Una instancia de IActionResult que representa una respuesta de error</returns>
+        </member>
+        <member name="P:TrabajoIntegradorSofttek.Services.IUnitOfWork.UsuarioRepository">
+            <summary>
+            Define una interfaz para acceder a los repositorios relacionados con las entidades de la base de datos.
+            </summary>
+        </member>
+        <member name="T:TrabajoIntegradorSofttek.Services.UnitOfWorkService">
+            <summary>
+            Implementación de la interfaz IUnitOfWork que proporciona acceso a los repositorios de entidades de la base de datos
+            </summary>
+        </member>
+        <member name="M:TrabajoIntegradorSofttek.Services.UnitOfWorkService.#ctor(TrabajoIntegradorSofttek.DataAccess.ApplicationDbContext)">
+            <summary>
+            Inicializa una nueva instancia de la clase UnitOfWorkService con el contexto de base de datos proporcionado
+            </summary>
+            <param name="context"></param>
+        </member>
+    </members>
+</doc>

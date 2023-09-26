@@ -1,0 +1,1118 @@
+{
+	"info": {
+		"_postman_id": "6403c8dc-7174-41c3-aaca-38771284ae87",
+		"name": "Softtek",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29300323"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cuil\": 20418265206,\r\n  \"clave\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/Usuarios",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"Usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UsuarioById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/UsuarioById/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"UsuarioById",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"string\",\r\n  \"dni\": 0,\r\n  \"cuil\": 0,\r\n  \"idRole\": 0,\r\n  \"clave\": \"string\",\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/Agregar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"Agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"string\",\r\n  \"dni\": 0,\r\n  \"cuil\": 0,\r\n  \"idRole\": 2,\r\n  \"clave\": \"string\",\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/Editar/5\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"Editar",
+								"5\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaLogico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTYxNzk0Mn0.hOEawP6giT0GVw-3IKSqS2V4LtPchfPsy4hEBLmsFyM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/AltaLogico/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"AltaLogico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLogico{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/DeleteLogico/23",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"DeleteLogico",
+								"23"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFisico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Usuario/DeleteFisico/6\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Usuario",
+								"DeleteFisico",
+								"6\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Trabajos",
+			"item": [
+				{
+					"name": "Trabajos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/Trabajos\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"Trabajos\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TrabajoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/TrabajoById/1\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"TrabajoById",
+								"1\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\": \"2023-09-22T03:18:39.071Z\",\r\n    \"idProyecto\": 3,\r\n    \"idServicio\": 2,\r\n    \"cantHoras\": 1200,\r\n    \"valorHora\": 10,\r\n    \"costo\": 1,\r\n    \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/Agregar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"Agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fecha\": \"2023-09-22T03:20:22.676Z\",\r\n  \"idProyecto\": 1,\r\n  \"idServicio\": 1,\r\n  \"cantHoras\": 10,\r\n  \"valorHora\": 10,\r\n  \"costo\": 1,\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/Editar/2\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"Editar",
+								"2\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaLogico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTYxNzk0Mn0.hOEawP6giT0GVw-3IKSqS2V4LtPchfPsy4hEBLmsFyM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/AltaLogico/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"AltaLogico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLogico{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/DeleteLogico/2\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"DeleteLogico",
+								"2\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFisico{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Trabajo/DeleteFisico/2\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Trabajo",
+								"DeleteFisico",
+								"2\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Proyectos",
+			"item": [
+				{
+					"name": "Proyectos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/Proyectos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"Proyectos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProyectosByEstado",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/ProyectosByEstado/2",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"ProyectosByEstado",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ProyectoById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/ProyectoById/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"ProyectoById",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Jesus\",\r\n  \"direccion\": \"Silveyra 4008\",\r\n  \"estado\": 1,\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/Agregar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"Agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombre\": \"Jesus\",\r\n  \"direccion\": \"Estatua\",\r\n  \"estado\": 2,\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/Editar/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"Editar",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaLogico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTYxNzk0Mn0.hOEawP6giT0GVw-3IKSqS2V4LtPchfPsy4hEBLmsFyM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/AltaLogico/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"AltaLogico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLogico{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/DeleteLogico/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"DeleteLogico",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFisico{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Proyecto/DeleteFisico/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Proyecto",
+								"DeleteFisico",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Servicios",
+			"item": [
+				{
+					"name": "Servicios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTM4NTkwMn0.Dr-yBPdG0l62M7RRmIyJaFaKXvEMKS1-UZ593IRpUTI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/Servicios",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"Servicios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ServiciosActivos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/ServiciosActivos",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"ServiciosActivos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ServicioById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/ServicioById/1\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"ServicioById",
+								"1\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descripcion\": \"Agarrar la pala\",\r\n  \"estado\": true,\r\n  \"valorHora\": 1,\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/Agregar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"Agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"descripcion\": \"Agarrar la pala\",\r\n  \"estado\": true,\r\n  \"valorHora\": 100,\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/Editar/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"Editar",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteLogico{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/DeleteLogico/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"DeleteLogico",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AltaLogico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTYxNzk0Mn0.hOEawP6giT0GVw-3IKSqS2V4LtPchfPsy4hEBLmsFyM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/AltaLogico/1",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"AltaLogico",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFisico{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Servicio/DeleteFisico/4\n",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Servicio",
+								"DeleteFisico",
+								"4\n"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTUzNTM1NH0.aaJimCdTLPaKRhO8YbYT1m1-JBjbNy_RPcRbjlFpWQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Role/Roles",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Role",
+								"Roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTUzNTM1NH0.aaJimCdTLPaKRhO8YbYT1m1-JBjbNy_RPcRbjlFpWQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Admin2\",\r\n  \"description\": \"PruebaPost\",\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Role/Agregar",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Role",
+								"Agregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTUzNTM1NH0.aaJimCdTLPaKRhO8YbYT1m1-JBjbNy_RPcRbjlFpWQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 3,\r\n  \"name\": \"ADMI22\",\r\n  \"description\": \"Prueba de edit\",\r\n  \"activo\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7112/api/Role/Editar/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Role",
+								"Editar",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteFisico{id}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTUzNTM1NH0.aaJimCdTLPaKRhO8YbYT1m1-JBjbNy_RPcRbjlFpWQM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:7112/api/Role/DeleteFisico/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7112",
+							"path": [
+								"api",
+								"Role",
+								"DeleteFisico",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJXZWJBcGlTdWJqZWN0IiwiQ3VpbCI6IjIwNDE4MjY1MjA2IiwiaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvd3MvMjAwNS8wNS9pZGVudGl0eS9jbGFpbXMvbmFtZWlkZW50aWZpZXIiOiIxIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiMSIsImV4cCI6MTY5NTUyMDU3MH0.Pz1E2GI6M_xIhDciEm9ftdgEsV83kH1PDfZKEuusduU"
+		}
+	]
+}
