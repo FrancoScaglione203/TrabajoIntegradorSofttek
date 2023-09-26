@@ -30,6 +30,11 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
             return usuarios;   
         }
 
+        /// <summary>
+        /// Devuelve usuario sin clave por seguridad
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Retorna usuario con la clave tapada por seguridad</returns>
         public override async Task<Usuario> GetById(int id)
         {
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
