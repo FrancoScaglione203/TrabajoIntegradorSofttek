@@ -406,6 +406,13 @@
             </summary>
             <returns>Retorna lista de usuarios con clave = null</returns>
         </member>
+        <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.GetById(System.Int32)">
+            <summary>
+            Devuelve usuario sin clave por seguridad
+            </summary>
+            <param name="id"></param>
+            <returns>Retorna usuario con la clave tapada por seguridad</returns>
+        </member>
         <member name="M:TrabajoIntegradorSofttek.DataAccess.Repositories.UsuarioRepository.Update(TrabajoIntegradorSofttek.Entities.Usuario)">
             <summary>
             Actualiza el usuario con el id de updateUsuario por el mismo 
