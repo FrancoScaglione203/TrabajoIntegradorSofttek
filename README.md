@@ -1,5 +1,5 @@
 # TrabajoIntegradorSofttek
-Proyecto desarrolado en .NET CORE 6 a partir de unas consignas que se nos brindaron en el curso intensivo de 6 semanas "Academia .Net" en conjunto con el empresa Softtek
+Proyecto desarrolado en .NET CORE 6 a partir de unas consignas que se nos brindaron en el curso intensivo de 6 semanas "Academia .Net" dictado por la Universidad del Museo Social Argentino en conjunto con el empresa Softtek
 https://drive.google.com/file/d/1yIRq0M9FdApUU2c8_OUoryahJM9B9cO8/view
 
 ## **Especificación de la Arquitectura**
@@ -28,7 +28,7 @@ Capa donde se encuentra clase e interfaz UnitOfWorkService
 
 ​
 ## **Especificación de GIT**​
-* Se crean ramas a partir de la rama Develop. La nomenclatura para el nombre de las ramas será la sigueinte: Feature/xx-Titulo (donde xx corresponde con el número de historia)
+* Se implento el patron GitFlow. La rama donde se encuentran las versiones finales es Master, la rama principal a partir de la cual se crean ramas es Develop. La nomenclatura para el nombre de las ramas será la sigueinte: Feature/xx-Titulo (donde xx corresponde con el número de historia)
 * El título del pull request debe contener el título de la historia tomada.
 
 ## **Autor**
