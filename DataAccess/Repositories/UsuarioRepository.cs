@@ -11,6 +11,7 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
 {
     public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
+        
 
         public UsuarioRepository(ApplicationDbContext context) : base(context)
         {
@@ -37,9 +38,24 @@ namespace TrabajoIntegradorSofttek.DataAccess.Repositories
         /// <returns>Retorna usuario con la clave tapada por seguridad</returns>
         public override async Task<Usuario> GetById(int id)
         {
+            Usuario usuarioreturn = new Usuario();
             var usuario = await _context.Usuarios.FirstOrDefaultAsync(x => x.Id == id);
-            usuario.Clave = "**********";
-            return usuario;
+            
+
+            if (usuario == null)
+            {
+                return usuario;
+            }
+            else
+            {
+                usuarioreturn.Nombre = usuario.Nombre;
+                usuarioreturn.Dni = usuario.Dni;
+                usuarioreturn.Cuil = usuario.Cuil;
+                usuarioreturn.RoleId = usuario.RoleId;
+                usuarioreturn.Clave = "*******";
+                usuarioreturn.Activo = usuario.Activo;
+            }
+            return usuarioreturn;
         }
 
         /// <summary>
