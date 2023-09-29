@@ -12,8 +12,8 @@ using TrabajoIntegradorSofttek.DataAccess;
 namespace TrabajoIntegradorSofttek.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230920023734_TPSofttek")]
-    partial class TPSofttek
+    [Migration("20230929002601_TrabajoIntegradorSofttek")]
+    partial class TrabajoIntegradorSofttek
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -235,7 +235,7 @@ namespace TrabajoIntegradorSofttek.Migrations
                             Activo = true,
                             CantHoras = 1000,
                             Costo = 150000m,
-                            Fecha = new DateTime(2023, 9, 19, 23, 37, 34, 158, DateTimeKind.Local).AddTicks(7746),
+                            Fecha = new DateTime(2023, 9, 28, 21, 26, 0, 926, DateTimeKind.Local).AddTicks(3505),
                             ProyectoId = 1,
                             ServicioId = 1,
                             ValorHora = 150m
